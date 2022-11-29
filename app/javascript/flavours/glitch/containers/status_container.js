@@ -16,8 +16,8 @@ import {
   unbookmark,
   pin,
   unpin,
-  statusAddReaction,
-  statusRemoveReaction,
+  addReaction,
+  removeReaction,
 } from 'flavours/glitch/actions/interactions';
 import {
   muteStatus,
@@ -46,7 +46,7 @@ import { showAlertForError } from '../actions/alerts';
 import AccountContainer from 'flavours/glitch/containers/account_container';
 import Spoilers from '../components/spoilers';
 import Icon from 'flavours/glitch/components/icon';
-import buildCustomEmojiMap from '../utils/emoji_map';
+import { makeCustomEmojiMap } from '../selectors';
 
 const messages = defineMessages({
   deleteConfirm: { id: 'confirmations.delete.confirm', defaultMessage: 'Delete' },
@@ -87,7 +87,7 @@ const makeMapStateToProps = () => {
       account: account || props.account,
       settings: state.get('local_settings'),
       prepend: prepend || props.prepend,
-      emojiMap: buildCustomEmojiMap(state),
+      emojiMap: makeCustomEmojiMap(state),
       pictureInPicture: getPictureInPicture(state, props),
     };
   };
@@ -168,11 +168,11 @@ const mapDispatchToProps = (dispatch, { intl, contextType }) => ({
   },
 
   onReactionAdd (statusId, name) {
-    dispatch(statusAddReaction(statusId, name));
+    dispatch(addReaction(statusId, name));
   },
 
   onReactionRemove (statusId, name) {
-    dispatch(statusRemoveReaction(statusId, name));
+    dispatch(removeReaction(statusId, name));
   },
 
   onEmbed (status) {
