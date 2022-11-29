@@ -607,6 +607,10 @@
   align-items: center;
   display: flex;
   margin-top: 8px;
+
+  & > .emoji-picker-dropdown > .emoji-button {
+    padding: 0;
+  }
 }
 
 .status__action-bar-button {
