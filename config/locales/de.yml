@@ -1328,6 +1328,10 @@ de:
       body: 'Dein Beitrag wurde von %{name} favorisiert:'
       subject: "%{name} favorisierte deinen Beitrag"
       title: Neue Favorisierung
+    reaction:
+      body: '%{name} hat auf deinen Beitrag reagiert:'
+      subject: '%{name} hat auf deinen Beitrag reagiert'
+      title: Neue Reaktion
     follow:
       body: "%{name} folgt dir jetzt!"
       subject: "%{name} folgt dir jetzt"
