@@ -463,6 +463,10 @@
   .notification__message {
     margin: -10px 0 10px;
   }
+
+  .reactions-bar--empty {
+    margin-top: 0;
+  }
 }
 
 .notification-favourite {
@@ -619,6 +623,10 @@
   &.icon-button--with-counter {
     margin-right: 14px;
   }
+
+  .fa-plus {
+    padding-top: 1px;
+  }
 }
 
 .status__action-bar-dropdown {
@@ -685,6 +693,10 @@
   display: flex;
   flex-direction: row;
   padding: 10px 0;
+
+  .fa-plus {
+    padding-top: 2px;
+  }
 }
 
 .detailed-status__link {
