@@ -22,21 +22,20 @@ export default class LocalSettingsPageItem extends React.PureComponent {
     })),
     settings: ImmutablePropTypes.map.isRequired,
     placeholder: PropTypes.string,
-    number: PropTypes.bool,
     disabled: PropTypes.bool,
   };
 
   handleChange = e => {
     const { target } = e;
-    const { item, onChange, options, placeholder, number } = this.props;
+    const { item, onChange, options, placeholder } = this.props;
     if (options && options.length > 0) onChange(item, target.value);
-    else if (placeholder) onChange(item, number ? parseInt(target.value) : target.value);
+    else if (placeholder) onChange(item, target.value);
     else onChange(item, target.checked);
   };
 
   render () {
     const { handleChange } = this;
-    const { settings, item, id, inputProps, options, children, dependsOn, dependsOnNot, placeholder, number, disabled } = this.props;
+    const { settings, item, id, inputProps, options, children, dependsOn, dependsOnNot, placeholder, disabled } = this.props;
     let enabled = !disabled;
 
     if (dependsOn) {
@@ -81,7 +80,7 @@ export default class LocalSettingsPageItem extends React.PureComponent {
           </fieldset>
         </div>
       );
-    } else if (placeholder || number) {
+    } else if (placeholder) {
       return (
         <div className='glitch local-settings__page__item string'>
           <label htmlFor={id}>
@@ -89,7 +88,7 @@ export default class LocalSettingsPageItem extends React.PureComponent {
             <p>
               <input
                 id={id}
-                type={number ? 'number' : 'text'}
+                type='text'
                 value={settings.getIn(item)}
                 placeholder={placeholder}
                 onChange={handleChange}
