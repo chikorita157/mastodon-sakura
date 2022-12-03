@@ -105,7 +105,6 @@ class Status extends ImmutablePureComponent {
     scrollKey: PropTypes.string,
     deployPictureInPicture: PropTypes.func,
     settings: ImmutablePropTypes.map.isRequired,
-    emojiMap: ImmutablePropTypes.map.isRequired,
     pictureInPicture: ImmutablePropTypes.contains({
       inUse: PropTypes.bool,
       available: PropTypes.bool,
@@ -821,7 +820,6 @@ class Status extends ImmutablePureComponent {
             numVisible={visibleReactions}
             addReaction={this.props.onReactionAdd}
             removeReaction={this.props.onReactionRemove}
-            emojiMap={this.props.emojiMap}
           />
 
           {!isCollapsed || !(muted || !settings.getIn(['collapsed', 'show_action_bar'])) ? (
