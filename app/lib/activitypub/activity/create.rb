@@ -125,7 +125,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
       conversation: conversation_from_uri(@object['conversation']),
       media_attachment_ids: process_attachments.take(4).map(&:id),
       poll: process_poll,
-      quote: quote_from_url(@object['quoteUrl']),
+      quote: process_quote,
     }
   end
 
@@ -426,10 +426,23 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
     retry
   end
 
-  def quote_from_url(url)
+  def guess_quote_url
+    if @object["quoteUrl"] && !@object["quoteUrl"].empty?
+      @object["quoteUrl"]
+    elsif @object["_misskey_quote"] && !@object["_misskey_quote"].empty?
+      @object["_misskey_quote"]
+    else
+      nil
+    end
+  end
+
+  def process_quote
+    url = guess_quote_url
     return nil if url.nil?
 
     quote = ResolveURLService.new.call(url)
     status_from_uri(quote.uri) if quote
+  rescue
+    nil
   end
 end

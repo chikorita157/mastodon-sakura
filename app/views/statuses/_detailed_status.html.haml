@@ -18,7 +18,6 @@
   - if status.quote?
     = render partial: "statuses/quote_status", locals: {status: status.quote}
 
-  .status__content.emojify{ :data => ({ spoiler: current_account&.user&.setting_expand_spoilers ? 'expanded' : 'folded' } if status.spoiler_text?) }<
   .status__content.emojify{ data: ({ spoiler: current_account&.user&.setting_expand_spoilers ? 'expanded' : 'folded' } if status.spoiler_text?) }<
     - if status.spoiler_text?
       %p<
