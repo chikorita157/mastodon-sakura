@@ -336,6 +336,21 @@ class StatusContent extends React.PureComponent {
       <TranslateButton onClick={this.handleTranslate} translation={status.get('translation')} />
     );
 
+    let quote = '';
+
+    if (status.get('quote', null) !== null) {
+      let quoteStatus = status.get('quote');
+      let quoteStatusContent = { __html: quoteStatus.get('contentHtml') };
+
+      quote = (
+        <div class="status__quote">
+          <blockquote>
+            <div dangerouslySetInnerHTML={quoteStatusContent} />
+          </blockquote>
+        </div>
+      );
+    }
+
     if (status.get('spoiler_text').length > 0) {
       let mentionsPlaceholder = '';
 
@@ -401,6 +416,7 @@ class StatusContent extends React.PureComponent {
           {mentionsPlaceholder}
 
           <div className={`status__content__spoiler ${!hidden ? 'status__content__spoiler--visible' : ''}`}>
+            {quote}
             <div
               ref={this.setContentsRef}
               key={`contents-${tagLinks}`}
@@ -426,6 +442,7 @@ class StatusContent extends React.PureComponent {
           onMouseUp={this.handleMouseUp}
           tabIndex='0'
         >
+          {quote}
           <div
             ref={this.setContentsRef}
             key={`contents-${tagLinks}-${rewriteMentions}`}
@@ -447,6 +464,7 @@ class StatusContent extends React.PureComponent {
           className={'status__content'}
           tabIndex='0'
         >
+          {quote}
           <div
             ref={this.setContentsRef}
             key={`contents-${tagLinks}`}
