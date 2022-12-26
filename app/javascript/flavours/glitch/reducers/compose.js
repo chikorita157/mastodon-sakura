@@ -449,8 +449,6 @@ export default function compose(state = initialState, action) {
         map.set('spoiler_text', '');
       }
     });
-  case COMPOSE_REPLY_CANCEL:
-    state = state.setIn(['advanced_options', 'threaded_mode'], false);
   case COMPOSE_QUOTE:
     return state.withMutations(map => {
       map.set('id', null);
@@ -467,6 +465,8 @@ export default function compose(state = initialState, action) {
       map.set('preselectDate', new Date());
       map.set('idempotencyKey', uuid());
     });
+  case COMPOSE_REPLY_CANCEL:
+    state = state.setIn(['advanced_options', 'threaded_mode'], false);
   case COMPOSE_QUOTE_CANCEL:
   case COMPOSE_RESET:
     return state.withMutations(map => {
