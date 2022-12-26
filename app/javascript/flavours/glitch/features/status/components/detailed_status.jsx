@@ -224,7 +224,7 @@ export default class DetailedStatus extends ImmutablePureComponent {
         );
         mediaIcons.push('picture-o');
       }
-    } else if (status.get('card')) {
+    } else if (!status.get('quote') && status.get('card')) {
       media.push(<Card sensitive={status.get('sensitive')} onOpenMedia={this.props.onOpenMedia} card={status.get('card')} />);
       mediaIcons.push('link');
     }
