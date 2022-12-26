@@ -471,6 +471,7 @@ export default function compose(state = initialState, action) {
   case COMPOSE_RESET:
     return state.withMutations(map => {
       map.set('in_reply_to', null);
+      map.set('quote_id', null);
       if (defaultContentType) map.set('content_type', defaultContentType);
       map.set('text', '');
       map.set('spoiler', false);
