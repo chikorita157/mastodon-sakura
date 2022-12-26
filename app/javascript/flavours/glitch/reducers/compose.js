@@ -466,9 +466,6 @@ export default function compose(state = initialState, action) {
       map.set('caretPosition', null);
       map.set('preselectDate', new Date());
       map.set('idempotencyKey', uuid());
-
-      console.log('COMPOSE_QUOTE, state:', map);
-      console.log('COMPOSE_QUOTE, action:', action);
     });
   case COMPOSE_QUOTE_CANCEL:
   case COMPOSE_RESET:
