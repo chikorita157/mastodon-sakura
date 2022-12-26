@@ -7,6 +7,7 @@ import ImmutablePureComponent from 'react-immutable-pure-component';
 
 //  Components.
 import AccountContainer from 'flavours/glitch/containers/account_container';
+import Icon from 'flavours/glitch/components/icon';
 import IconButton from 'flavours/glitch/components/icon_button';
 import AttachmentList from 'flavours/glitch/components/attachment_list';
 
@@ -58,6 +59,9 @@ class ReplyIndicator extends ImmutablePureComponent {
             title={intl.formatMessage(messages.cancel)}
             inverted
           />
+          <Icon
+            className='quote-indicator__cancel icon-button inverted'
+            id='reply' />
           {account && (
             <AccountContainer
               id={account}
