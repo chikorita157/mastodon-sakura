@@ -66,6 +66,10 @@ class StatusEdit < ApplicationRecord
     status.quote?
   end
 
+  def quote?
+    status.quote?
+  end
+
   def proper
     self
   end
