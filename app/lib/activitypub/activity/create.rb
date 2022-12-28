@@ -427,8 +427,12 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
   end
 
   def guess_quote_url
-    if @object["quoteUrl"] && !@object["quoteUrl"].empty?
+    if @object["quoteUri"] && !@object["quoteUri"].empty?
+      @object["quoteUri"]
+    elsif @object["quoteUrl"] && !@object["quoteUrl"].empty?
       @object["quoteUrl"]
+    elsif @object["quoteURL"] && !@object["quoteURL"].empty?
+      @object["quoteURL"]
     elsif @object["_misskey_quote"] && !@object["_misskey_quote"].empty?
       @object["_misskey_quote"]
     else
