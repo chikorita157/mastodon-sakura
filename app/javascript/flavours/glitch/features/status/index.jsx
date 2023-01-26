@@ -43,11 +43,7 @@ import { initMuteModal } from 'flavours/glitch/actions/mutes';
 import { initBlockModal } from 'flavours/glitch/actions/blocks';
 import { initReport } from 'flavours/glitch/actions/reports';
 import { initBoostModal } from 'flavours/glitch/actions/boosts';
-<<<<<<< HEAD
 import { makeCustomEmojiMap, makeGetStatus, makeGetPictureInPicture } from 'flavours/glitch/selectors';
-=======
-import { makeGetStatus } from 'flavours/glitch/selectors';
->>>>>>> f0197c80d (display external custom emoji reactions properly)
 import ScrollContainer from 'flavours/glitch/containers/scroll_container';
 import ColumnBackButton from 'flavours/glitch/components/column_back_button';
 import ColumnHeader from '../../components/column_header';
@@ -708,12 +704,7 @@ class Status extends ImmutablePureComponent {
                   domain={domain}
                   showMedia={this.state.showMedia}
                   onToggleMediaVisibility={this.handleToggleMediaVisibility}
-<<<<<<< HEAD
                   pictureInPicture={pictureInPicture}
-                  emojiMap={this.props.emojiMap}
-=======
-                  usingPiP={usingPiP}
->>>>>>> f0197c80d (display external custom emoji reactions properly)
                 />
 
                 <ActionBar
