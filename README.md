@@ -24,3 +24,4 @@ So here's the deal: we all work on this code, and anyone who uses that does so a
 - Footer links and login tweaks
 - Holiday Themes Added
 - Mastodon-bird-ui theme by [ronilaukkarinen](https://github.com/ronilaukkarinen/mastodon-bird-ui/blob/master/style.css)
+- Add Quote Toots (cherrypicked from Treehouse fork by [Ariadne Conill ](https://gitea.treehouse.systems/treehouse/mastodon/pulls/36))
