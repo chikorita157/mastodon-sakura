@@ -101,6 +101,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
 
     resolve_thread(@status)
     fetch_replies(@status)
+    return if Treehouse::Automod.process_status!(@status)
     distribute
     forward_for_reply
   end

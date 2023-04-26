@@ -231,6 +231,114 @@ RSpec.describe ActivityPub::ProcessAccountService do
     end
   end
 
+  context 'treehouse automod' do
+    subject { described_class.new.call(account_username, 'foo.test', payload) }
+    let(:account_username) { 'evil' }
+    let(:account_display_name) { 'evil display name' }
+    let(:account_payload_suspended) { false }
+
+    let(:automod_account_username) { nil }
+
+    let(:payload) do
+      {
+        id: 'https://foo.test',
+        type: 'Actor',
+        inbox: 'https://foo.test/inbox',
+        suspended: account_payload_suspended,
+        name: account_display_name,
+      }.with_indifferent_access
+    end
+
+    let(:name_hash_hash) do
+      {
+        # 'evil' => 'evil display name'
+        '4034a346ccee15292d823416f7510a2f' => Set['225e44a7c4a792ee22a4ada2032da7cd']
+      }
+    end
+
+    before do
+      allow(Rails.configuration.x.th_automod).to receive(:account_service_heuristic_auto_suspend_active).and_return(true)
+      allow(Rails.configuration.x.th_automod).to receive(:automod_account_username).and_return(automod_account_username)
+
+      stub_const('::Treehouse::Automod::AccountServiceExt::HEURISTIC_NAMES', name_hash_hash)
+      stub_const('::Treehouse::Automod::AccountServiceExt::HEURISTIC_MAX_LEN', 20)
+    end
+
+    context 'new account' do
+      context 'heuristic matching' do
+        it 'suspends the user locally' do
+          expect(subject.suspended?).to be true
+          expect(subject.suspension_origin_local?).to be true
+        end
+      end
+
+      context 'heuristic not matching' do
+        let(:account_display_name) { '' }
+        it 'does nothing' do
+          expect(subject.suspended?).to be false
+        end
+      end
+    end
+
+    context 'existing account' do
+      let!(:account) { Fabricate(:account, username: account_username, domain: 'foo.test', display_name: account_display_name) }
+
+      before do
+        allow(Admin::SuspensionWorker).to receive(:perform_async)
+      end
+
+      context 'heuristic matching' do
+        it 'suspends the user locally' do
+          expect(subject.suspended?).to be true
+          expect(subject.suspension_origin_local?).to be true
+        end
+      end
+
+      context 'heuristic not matching' do
+        let(:account_display_name) { 'not evil display name' }
+
+        it 'does nothing' do
+          expect(subject.suspended?).to be false
+        end
+
+        context 'suspended locally' do
+          before do
+            account.suspend!(origin: :local)
+          end
+
+          it 'does nothing' do
+            expect(subject.suspended?).to be true
+          end
+        end
+      end
+    end
+
+    context 'tracking report' do
+      let(:automod_account_username) { 'automod_test' }
+
+      let!(:automod_user_role) { Fabricate(:user_role, name: 'Automod', permissions: UserRole::FLAGS[:administrator]) }
+
+      let!(:automod_account) do
+        account = Fabricate(:account, username: automod_account_username)
+        account.user.role_id = automod_user_role.id
+        account.user.save!
+        account
+      end
+
+      it 'creates report' do
+        expect(subject.targeted_reports.empty?).to be_falsy
+
+        report = Report.find_by(target_account_id: subject.id, account_id: automod_account.id, assigned_account_id: automod_account.id)
+        expect(report.comment.starts_with?('Tracking Report - automatically created by TreehouseAutomod')).to be_truthy
+      end
+
+      it 'creates account action' do
+        subject
+        expect(Admin::ActionLog.find_by(account_id: automod_account.id, target_id: subject.id)).not_to be nil
+      end
+    end
+  end
+
   private
 
   def create_some_remote_accounts
@@ -240,4 +348,5 @@ RSpec.describe ActivityPub::ProcessAccountService do
   def create_fewer_than_rate_limit_accounts
     change(Account.remote, :count).by_at_most(5)
   end
+
 end

@@ -40,6 +40,7 @@ class ReportService < BaseService
   end
 
   def notify_staff!
+    return if @options[:th_skip_notify_staff]
     return if @report.unresolved_siblings?
 
     User.those_who_can(:manage_reports).includes(:account).find_each do |u|
@@ -65,6 +66,7 @@ class ReportService < BaseService
   end
 
   def forward?
+    return false if @options[:th_skip_forward]
     !@target_account.local? && ActiveModel::Type::Boolean.new.cast(@options[:forward])
   end
 
