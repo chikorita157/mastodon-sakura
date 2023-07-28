@@ -16,6 +16,14 @@
   color: $link-color;
 }
 
+.reply-indicator {
+  color: $darker-text-color !important;
+}
+
+.text-icon-button:active, .text-icon-button:focus, .text-icon-button:hover {
+  color: $link-color;
+}
+
 .status__content a,
 .link-footer a,
 .reply-indicator__content a,
