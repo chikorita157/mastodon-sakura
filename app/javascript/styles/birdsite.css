@@ -1,5 +1,9 @@
 /* Mastodon Bird UI by @rolle@mementomori.social
+<<<<<<< HEAD
    1.7.1rc2-nightly */
+=======
+   1.6.4 */
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 
 /* CSS variables */
 :root {
@@ -57,8 +61,11 @@
   --color-hashtag: var(--color-accent);
   --color-mention: var(--color-accent);
   --color-link: var(--color-accent);
+<<<<<<< HEAD
   --color-bg-compose-form: rgb(39 44 64 / 40%);
   --color-bg-compose-form-focus: rgb(39 44 64 / 80%);
+=======
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 
   /* In the original UI this color is lighten($ui-base-color, 12%) */
   --color-outer-space: #42485a;
@@ -106,6 +113,9 @@
     rgba(30, 32, 40, 45%) 97%,
     rgba(30, 32, 40, 0%) 100%
   );
+
+  /* Logo */
+  --logo: url('data:image/svg+xml, %3Csvg class="mastodon-logo" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 216.4144 232.00976"%3E%3Cdefs xmlns="http://www.w3.org/2000/svg"%3E%3ClinearGradient xmlns="http://www.w3.org/2000/svg" id="gradient" x2="0%25" y2="100%25" gradientUnits="userSpaceOnUse"%3E%3Cstop offset="0%25" stop-color="%23595aff"%3E%3C/stop%3E%3Cstop offset="100%25" stop-color="%23595aff"%3E%3C/stop%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath xmlns="http://www.w3.org/2000/svg" d="M211.80734 139.0875c-3.18125 16.36625-28.4925 34.2775-57.5625 37.74875-15.15875 1.80875-30.08375 3.47125-45.99875 2.74125-26.0275-1.1925-46.565-6.2125-46.565-6.2125 0 2.53375.15625 4.94625.46875 7.2025 3.38375 25.68625 25.47 27.225 46.39125 27.9425 21.11625.7225 39.91875-5.20625 39.91875-5.20625l.8675 19.09s-14.77 7.93125-41.08125 9.39c-14.50875.7975-32.52375-.365-53.50625-5.91875C9.23234 213.82 1.40609 165.31125.20859 116.09125c-.365-14.61375-.14-28.39375-.14-39.91875 0-50.33 32.97625-65.0825 32.97625-65.0825C49.67234 3.45375 78.20359.2425 107.86484 0h.72875c29.66125.2425 58.21125 3.45375 74.8375 11.09 0 0 32.975 14.7525 32.975 65.0825 0 0 .41375 37.13375-4.59875 62.915" fill="url(%23gradient)"%3E%3C/path%3E%3Cpath d="M177.50984 80.077v60.94125h-24.14375v-59.15c0-12.46875-5.24625-18.7975-15.74-18.7975-11.6025 0-17.4175 7.5075-17.4175 22.3525v32.37625H96.20734V85.42325c0-14.845-5.81625-22.3525-17.41875-22.3525-10.49375 0-15.74 6.32875-15.74 18.7975v59.15H38.90484V80.077c0-12.455 3.17125-22.3525 9.54125-29.675 6.56875-7.3225 15.17125-11.07625 25.85-11.07625 12.355 0 21.71125 4.74875 27.8975 14.2475l6.01375 10.08125 6.015-10.08125c6.185-9.49875 15.54125-14.2475 27.8975-14.2475 10.6775 0 19.28 3.75375 25.85 11.07625 6.36875 7.3225 9.54 17.22 9.54 29.675" fill="%23fff"%3E%3C/path%3E%3C/svg%3E');
 
   /* Logo */
   --logo: url('data:image/svg+xml, %3Csvg class="mastodon-logo" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 216.4144 232.00976"%3E%3Cdefs xmlns="http://www.w3.org/2000/svg"%3E%3ClinearGradient xmlns="http://www.w3.org/2000/svg" id="gradient" x2="0%25" y2="100%25" gradientUnits="userSpaceOnUse"%3E%3Cstop offset="0%25" stop-color="%23595aff"%3E%3C/stop%3E%3Cstop offset="100%25" stop-color="%23595aff"%3E%3C/stop%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath xmlns="http://www.w3.org/2000/svg" d="M211.80734 139.0875c-3.18125 16.36625-28.4925 34.2775-57.5625 37.74875-15.15875 1.80875-30.08375 3.47125-45.99875 2.74125-26.0275-1.1925-46.565-6.2125-46.565-6.2125 0 2.53375.15625 4.94625.46875 7.2025 3.38375 25.68625 25.47 27.225 46.39125 27.9425 21.11625.7225 39.91875-5.20625 39.91875-5.20625l.8675 19.09s-14.77 7.93125-41.08125 9.39c-14.50875.7975-32.52375-.365-53.50625-5.91875C9.23234 213.82 1.40609 165.31125.20859 116.09125c-.365-14.61375-.14-28.39375-.14-39.91875 0-50.33 32.97625-65.0825 32.97625-65.0825C49.67234 3.45375 78.20359.2425 107.86484 0h.72875c29.66125.2425 58.21125 3.45375 74.8375 11.09 0 0 32.975 14.7525 32.975 65.0825 0 0 .41375 37.13375-4.59875 62.915" fill="url(%23gradient)"%3E%3C/path%3E%3Cpath d="M177.50984 80.077v60.94125h-24.14375v-59.15c0-12.46875-5.24625-18.7975-15.74-18.7975-11.6025 0-17.4175 7.5075-17.4175 22.3525v32.37625H96.20734V85.42325c0-14.845-5.81625-22.3525-17.41875-22.3525-10.49375 0-15.74 6.32875-15.74 18.7975v59.15H38.90484V80.077c0-12.455 3.17125-22.3525 9.54125-29.675 6.56875-7.3225 15.17125-11.07625 25.85-11.07625 12.355 0 21.71125 4.74875 27.8975 14.2475l6.01375 10.08125 6.015-10.08125c6.185-9.49875 15.54125-14.2475 27.8975-14.2475 10.6775 0 19.28 3.75375 25.85 11.07625 6.36875 7.3225 9.54 17.22 9.54 29.675" fill="%23fff"%3E%3C/path%3E%3C/svg%3E');
@@ -216,6 +226,7 @@ body.theme-mastodon-light.layout-single-column {
   --color-dark-electric-blue: #9088a6;
   --color-bg-75: #ffffffbf;
   --color-accent: var(--color-accent-dark);
+  --color-accent-dark-50: #595aff80;
   --color-ghost-button-text: var(--color-accent-dark);
   --color-bg-compose-form: rgb(147 136 166 / 20%);
   --color-bg-compose-form-focus: rgb(147 136 166 / 30%);
@@ -353,7 +364,11 @@ body.layout-single-column {
   color: var(--color-mention);
 }
 
+<<<<<<< HEAD
 /* stylelint-disable-next-line  -- readability */
+=======
+/* stylelint-disable-next-line */
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 .layout-single-column .status-link.mention:not(.hashtag):not(.mention) {
   color: var(--color-link);
 }
@@ -377,7 +392,10 @@ body.layout-single-column {
 
 /* Things that should have the default font-size */
 .layout-single-column .notification__message,
+<<<<<<< HEAD
 .layout-single-column .status__content,
+=======
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 .layout-single-column .account__header__tabs__name h1 small,
 .layout-single-column .button,
 .layout-single-column .status__content__read-more-button,
@@ -395,6 +413,7 @@ body.layout-single-column {
 
 /* Things that should have the mid font-size */
 .layout-single-column .account__header__extra__links,
+<<<<<<< HEAD
 .layout-single-column
   .columns-area__panels__pane--compositional
   .account__header__account-note
@@ -408,6 +427,12 @@ body.layout-single-column {
   .columns-area__panels__pane--compositional
   .compose-form
   .spoiler-input__input {
+=======
+.layout-single-column .columns-area__panels__pane--compositional .account__header__account-note textarea,
+.layout-single-column .account__header__content,
+.layout-single-column .columns-area__panels__pane--compositional .compose-form .autosuggest-textarea__textarea,
+.layout-single-column .columns-area__panels__pane--compositional .compose-form .spoiler-input__input {
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
   font-size: var(--font-size-mid);
   line-height: var(--line-height-mid);
 }
@@ -509,6 +534,7 @@ body.layout-single-column {
   top: -2px;
 }
 
+<<<<<<< HEAD
 /* URL preview cards */
 .layout-single-column .status-card,
 .layout-single-column .status-card:hover,
@@ -542,13 +568,33 @@ body.layout-single-column {
 }
 
 .layout-single-column .status-card.expanded {
+=======
+/* Bigger preview cards */
+.layout-single-column .status-card,
+.layout-single-column .status-card.compact {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
   display: block;
+  transition: all 200ms;
+}
+
+/* Hide empty YouTube description */
+.layout-single-column .status-card__description:empty {
+  display: none;
+}
+
+.layout-single-column .status-card:focus,
+.layout-single-column .status-card:hover {
+  background-color: rgba(255 255 255 / .03);
 }
 
 .layout-single-column a.status-card .status-card__host {
   font-size: var(--font-size);
 }
 
+<<<<<<< HEAD
 .layout-single-column .status-card a:active .status-card__author,
 .layout-single-column .status-card a:active .status-card__title,
 .layout-single-column .status-card a:focus .status-card__author,
@@ -611,6 +657,20 @@ body.layout-single-column {
 }
 
 .layout-single-column a.status-card .status-card__title {
+=======
+.layout-single-column .status-card .status-card__image-image,
+.layout-single-column .status-card .status-card__image-image.compact {
+  border-radius: 0;
+}
+
+.layout-single-column .status-card .status-card__content,
+.layout-single-column .status-card.compact .status-card__content {
+  padding: 15px;
+}
+
+.layout-single-column .status-card .status-card__title,
+.layout-single-column .status-card.compact .status-card__title {
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
   color: var(--color-fg);
   font-size: var(--font-size-title);
   font-weight: var(--font-weight-semibold);
@@ -622,6 +682,7 @@ body.layout-single-column {
   white-space: inherit;
 }
 
+<<<<<<< HEAD
 .layout-single-column .status-card.expanded .status-card__host {
   color: var(--color-dim);
   font-size: var(--font-size);
@@ -630,6 +691,13 @@ body.layout-single-column {
 }
 
 .layout-single-column .status-card.expanded .status-card__description {
+=======
+.layout-single-column .status-card .status-card__host,
+.layout-single-column .status-card.compact .status-card__host {
+  color: var(--color-dim);
+  font-size: var(--font-size-mid);
+  margin-bottom: 5px;
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
   margin-top: 0;
 }
 
@@ -720,9 +788,13 @@ body.layout-single-column {
 }
 
 /* Content warning placeholder */
+<<<<<<< HEAD
 .layout-single-column
   .compose-form
   .autosuggest-textarea__textarea::placeholder,
+=======
+.layout-single-column .compose-form .autosuggest-textarea__textarea::placeholder,
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 .layout-single-column .compose-form .spoiler-input__input::placeholder {
   color: var(--color-dim);
 }
@@ -893,11 +965,22 @@ body.embed .status__content a,
   stroke: var(--color-accent) !important;
 }
 
+<<<<<<< HEAD
 /* Mud background colors, reply-indicator */
+=======
+/* Mud background colors */
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 .layout-single-column .reply-indicator {
   background-color: var(--color-mud);
   color: var(--color-light-text);
   max-height: 20vh;
+}
+
+/* Dropdown hovers */
+.layout-single-column .language-dropdown__dropdown__results__item:hover,
+.layout-single-column .language-dropdown__dropdown__results__item:focus {
+  background-color: var(--color-accent-dark-50);
+  color: var(--color-light-text);
 }
 
 /* Dropdown hovers */
@@ -981,6 +1064,7 @@ body.embed .status__content a,
 }
 
 /* Things like notification status update text that should be dim */
+<<<<<<< HEAD
 .layout-single-column
   .notification
   .status-link.mention:not(.hashtag, .mention),
@@ -989,11 +1073,21 @@ body.embed .status__content a,
 .layout-single-column
   .compose-form
   .autosuggest-textarea__textarea::placeholder,
+=======
+/* stylelint-disable-next-line selector-not-notation */
+.layout-single-column .notification .status-link.mention:not(.hashtag):not(.mention),
+.layout-single-column .notification .status-link.hashtag,
+.layout-single-column .notification .status-link.mention:not(.hashtag),
+.layout-single-column .compose-form .autosuggest-textarea__textarea::placeholder,
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 .layout-single-column .compose-form .icon-button,
 .layout-single-column .compose-form .spoiler-input__input::placeholder,
 .layout-single-column .compose-form__poll-wrapper .button.button-secondary,
 .layout-single-column .language-dropdown__dropdown__results__item__common-name,
+<<<<<<< HEAD
 .layout-single-column .report-dialog-modal__textarea::placeholder,
+=======
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 .layout-single-column .poll__link,
 .layout-single-column .muted .poll,
 .layout-single-column .status .status__relative-time,
@@ -1059,9 +1153,13 @@ body.embed .status__content a,
 .layout-single-column .muted .status__content a,
 .layout-single-column .muted .status__content p,
 .layout-single-column .muted .status__display-name strong,
+<<<<<<< HEAD
 .layout-single-column
   .privacy-dropdown__option:not(.active)
   .privacy-dropdown__option__content {
+=======
+.layout-single-column .privacy-dropdown__option:not(.active) .privacy-dropdown__option__content {
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
   color: var(--color-dim);
 }
 
@@ -1160,6 +1258,9 @@ body.embed .status__content a,
 .layout-single-column .report-dialog-modal__lead,
 .layout-single-column .detailed-status__display-name strong,
 .layout-single-column .dismissable-banner__message,
+.layout-single-column .privacy-dropdown__option.active,
+.layout-single-column .privacy-dropdown__option:hover .privacy-dropdown__option__content,
+.layout-single-column .privacy-dropdown__option:focus .privacy-dropdown__option__content,
 .layout-single-column .privacy-dropdown__option,
 .layout-single-column .privacy-dropdown__option__content strong,
 .layout-single-column .privacy-dropdown__option.active,
@@ -1222,7 +1323,10 @@ body.embed .status__content a,
 /* Status action bar */
 .layout-single-column .status__action-bar {
   margin-top: 12px;
+<<<<<<< HEAD
   max-height: 27px;
+=======
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 }
 
 /* Display name */
@@ -1428,10 +1532,17 @@ body.embed .detailed-status__display-avatar > img,
 }
 
 /* Rtl version */
+<<<<<<< HEAD
 [dir='rtl'] .layout-single-column .status__action-bar,
 [dir='rtl'] .layout-single-column .attachment-list,
 [dir='rtl'] .layout-single-column .status__content__read-more-button,
 [dir='rtl'] .layout-single-column .status .status__content {
+=======
+[dir="rtl"] .layout-single-column .status__action-bar,
+[dir="rtl"] .layout-single-column .attachment-list,
+[dir="rtl"] .layout-single-column .status__content__read-more-button,
+[dir="rtl"] .layout-single-column .status .status__content {
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
   padding-left: 0;
   padding-right: calc(var(--size-avatar) + var(--gap-default));
 }
@@ -1568,7 +1679,11 @@ body.embed .detailed-status__meta .detailed-status__link .fa-retweet,
   background-color: var(--color-bg);
   border-radius: var(--border-radius-badges);
   color: var(--color-ghost-button-text);
+<<<<<<< HEAD
   opacity: 0.5;
+=======
+  opacity: .5;
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 }
 
 /* Alt badge */
@@ -1582,16 +1697,23 @@ body.embed .detailed-status__meta .detailed-status__link .fa-retweet,
   top: var(--badges-distance-from-edge);
 }
 
+<<<<<<< HEAD
 .layout-single-column .media-gallery__item__badges {
+=======
+.layout-single-column .media-gallery__gifv__label {
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
   bottom: var(--badges-distance-from-edge);
   inset-inline-start: var(--badges-distance-from-edge);
 }
 
+<<<<<<< HEAD
 .layout-single-column .spoiler-button.spoiler-button--minified > button:hover,
 .layout-single-column .spoiler-button.spoiler-button--minified > button:focus {
   opacity: 1;
 }
 
+=======
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 .layout-single-column .icon-button:hover {
   color: var(--color-accent);
 }
@@ -2139,6 +2261,7 @@ body.embed .detailed-status__meta .detailed-status__link .fa-retweet,
 }
 
 .layout-single-column .list-adder__lists .fa-times::before,
+<<<<<<< HEAD
 .layout-single-column
   .account__wrapper
   .account__relationship
@@ -2154,11 +2277,18 @@ body.embed .detailed-status__meta .detailed-status__link .fa-retweet,
   .account__relationship
   .icon-button.active
   .fa::before {
+=======
+.layout-single-column .account__wrapper .account__relationship .icon-button.active .fa::before,
+.layout-single-column .explore__search-results .account__relationship .icon-button.active .fa::before,
+.layout-single-column .notification .account__relationship .icon-button.active .fa::before {
+  /* stylelint-disable-next-line */
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
   color: var(--color-green);
   opacity: 0.75;
 }
 
 .layout-single-column .list-adder__lists .fa-times:hover::before,
+<<<<<<< HEAD
 .layout-single-column
   .explore__search-results
   .icon-button.active:hover
@@ -2168,6 +2298,11 @@ body.embed .detailed-status__meta .detailed-status__link .fa-retweet,
   .account__relationship
   .icon-button.active:hover
   .fa::before {
+=======
+.layout-single-column .explore__search-results .icon-button.active:hover .fa::before,
+.layout-single-column .notification .account__relationship .icon-button.active:hover .fa::before {
+  /* stylelint-disable-next-line */
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
   color: var(--color-red);
   opacity: 1;
 }
@@ -3580,6 +3715,7 @@ Mobile devices */
 .layout-single-column .video-player,
 .layout-single-column .media-gallery__gifv,
 .layout-single-column .media-gallery__preview {
+<<<<<<< HEAD
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -3588,6 +3724,37 @@ Mobile devices */
 /* Exception for your own profile media gallery */
 .layout-single-column .account-gallery__container .media-gallery__gifv {
   border-radius: 0;
+=======
+  border-radius: var(--border-radius);
+  outline: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.layout-single-column .media-gallery__item-thumbnail:has(> img:not([alt]))::after,
+.layout-single-column .video-player:has(> video:not([title]))::after,
+.layout-single-column .media-gallery__gifv:has(> video:not([title]))::after {
+  align-self: flex-end;
+  background-color: var(--color-bg-75);
+  border-radius: var(--border-radius-badges);
+  bottom: var(--badges-distance-from-edge);
+  color: var(--color-light-text);
+  content: 'No alt';
+  display: flex;
+  font-size: 9px;
+  font-weight: 500;
+  height: 14px;
+  justify-self: flex-end;
+  left: auto;
+  line-height: 14px;
+  opacity: 1;
+  padding: 2px 5px;
+  position: absolute;
+  right: var(--badges-distance-from-edge);
+  text-transform: uppercase;
+  top: auto;
+  width: unset;
+  z-index: 3;
+>>>>>>> ebda13c1638fe9d08a46a82471c4df5ca769cf9c
 }
 
 /* Hide autoplaying gifs in notifications (they get annoying if you have favs/boosts on) */
@@ -3598,6 +3765,11 @@ Mobile devices */
   .notification.notification-favourite
   .media-gallery:has(.media-gallery__gifv.autoplay) {
   display: none;
+}
+
+/* Exception for your own profile media gallery */
+.layout-single-column .account-gallery__container .media-gallery__gifv {
+  border-radius: 0;
 }
 
 /* More distinct focus color for accessibility, instead of just white */
