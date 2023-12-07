@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixForeignKeysStatusReactions < ActiveRecord::Migration[6.1]
   disable_ddl_transaction!
 
@@ -14,4 +16,3 @@ class FixForeignKeysStatusReactions < ActiveRecord::Migration[6.1]
     validate_foreign_key :status_reactions, :custom_emojis
   end
 end
-
