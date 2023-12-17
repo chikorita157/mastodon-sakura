@@ -283,8 +283,9 @@ class Status < ApplicationRecord
       if account.nil?
         scope.select('name, custom_emoji_id, count(*) as count, false as me')
       else
-        subquery_account_reacted = "select 1 from status_reactions r where r.account_id = #{account.id} and r.status_id = status_reactions.status_id and r.name = status_reactions.name and (r.custom_emoji_id = status_reactions.custom_emoji_id or r.custom_emoji_id is null and status_reactions.custom_emoji_id is null)"
-        scope.select("name, custom_emoji_id, count(*) as count, exists(#{subquery_account_reacted}) as me")
+        scope.select(<<~SQL.squish)
+          name, custom_emoji_id, count(*) as count, exists(select 1 from status_reactions r where r.account_id = #{account.id} and r.status_id = status_reactions.status_id and r.name = status_reactions.name and (r.custom_emoji_id = status_reactions.custom_emoji_id or r.custom_emoji_id is null and status_reactions.custom_emoji_id is null)) as me
+        SQL
       end
     end
 

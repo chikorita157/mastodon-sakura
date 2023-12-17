@@ -83,6 +83,7 @@
  * @property {boolean} use_blurhash
  * @property {boolean=} use_pending_items
  * @property {string} version
+ * @property {number} visible_reactions
  * @property {string} sso_redirect
  * @property {boolean} translation_enabled
  * @property {number} visible_reactions
