@@ -9,6 +9,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 
 
+import MoodIcon from '@/material-icons/400-24px/mood.svg?react';
 import RepeatIcon from '@/material-icons/400-24px/repeat.svg?react';
 import StarIcon from '@/material-icons/400-24px/star-fill.svg?react';
 import { AnimatedNumber } from 'flavours/glitch/components/animated_number';
@@ -25,7 +26,7 @@ import { Avatar } from '../../../components/avatar';
 import { DisplayName } from '../../../components/display_name';
 import MediaGallery from '../../../components/media_gallery';
 import StatusContent from '../../../components/status_content';
-import StatusReactions from '../../../components/status_reactions';
+import { StatusReactions } from '../../../components/status_reactions';
 import Audio from '../../audio';
 import scheduleIdleTask from '../../ui/util/schedule_idle_task';
 import Video from '../../video';
@@ -143,6 +144,7 @@ class DetailedStatus extends ImmutablePureComponent {
     const reblogIcon = 'retweet';
     const reblogIconComponent = RepeatIcon;
     let favouriteLink = '';
+    let reactionLink = '';
     let edited = '';
 
     //  Depending on user settings, some media are considered as parts of the
@@ -288,12 +290,28 @@ class DetailedStatus extends ImmutablePureComponent {
           </span>
         </Link>
       );
+      reactionLink = (
+        <Link to={`/@${status.getIn(['account', 'acct'])}/${status.get('id')}/reactions`} className='detailed-status__link'>
+          <Icon id='mood' icon={MoodIcon} />
+          <span className='detailed-status__reactions'>
+            <AnimatedNumber value={status.get('reactions').reduce((total, obj) => total + obj.get('count'), 0)} />
+          </span>
+        </Link>
+      );
     } else {
       favouriteLink = (
         <a href={`/interact/${status.get('id')}?type=favourite`} className='detailed-status__link' onClick={this.handleModalLink}>
           <Icon id='star' icon={StarIcon} />
           <span className='detailed-status__favorites'>
             <AnimatedNumber value={status.get('favourites_count')} />
+          </span>
+        </a>
+      );
+      reactionLink = (
+        <a href={`/interact/${status.get('id')}?type=reaction`} className='detailed-status__link' onClick={this.handleModalLink}>
+          <Icon id='mood' icon={MoodIcon} />
+          <span className='detailed-status__reactions'>
+            <AnimatedNumber value={status.get('reactions').reduce((total, obj) => total + obj.get('count'), 0)} />
           </span>
         </a>
       );
@@ -348,7 +366,7 @@ class DetailedStatus extends ImmutablePureComponent {
           <div className='detailed-status__meta'>
             <a className='detailed-status__datetime' href={status.get('url')} target='_blank' rel='noopener noreferrer'>
               <FormattedDate value={new Date(status.get('created_at'))} hour12={false} year='numeric' month='short' day='2-digit' hour='2-digit' minute='2-digit' />
-            </a>{edited}{visibilityLink}{applicationLink}{reblogLink} · {favouriteLink}
+            </a>{edited}{visibilityLink}{applicationLink}{reblogLink} · {favouriteLink} · {reactionLink}
           </div>
         </div>
       </div>
