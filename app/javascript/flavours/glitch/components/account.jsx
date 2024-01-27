@@ -14,6 +14,7 @@ import { VerifiedBadge } from 'flavours/glitch/components/verified_badge';
 import { me } from '../initial_state';
 
 import { Avatar } from './avatar';
+import { AvatarOverlay } from './avatar_overlay';
 import { Button } from './button';
 import { FollowersCounter } from './counters';
 import { DisplayName } from './display_name';
@@ -42,6 +43,7 @@ class Account extends ImmutablePureComponent {
     onMute: PropTypes.func.isRequired,
     onMuteNotifications: PropTypes.func.isRequired,
     intl: PropTypes.object.isRequired,
+    overlayEmoji: PropTypes.object,
     hidden: PropTypes.bool,
     minimal: PropTypes.bool,
     defaultAction: PropTypes.string,
@@ -50,6 +52,7 @@ class Account extends ImmutablePureComponent {
 
   static defaultProps = {
     size: 46,
+    overlayEmoji: { name: null }
   };
 
   handleFollow = () => {
@@ -73,7 +76,7 @@ class Account extends ImmutablePureComponent {
   };
 
   render () {
-    const { account, intl, hidden, withBio, defaultAction, size, minimal } = this.props;
+    const { account, intl, hidden, withBio, defaultAction, overlayEmoji, size, minimal } = this.props;
 
     if (!account) {
       return <EmptyAccount size={size} minimal={minimal} />;
@@ -138,12 +141,19 @@ class Account extends ImmutablePureComponent {
       verification = <VerifiedBadge link={firstVerifiedField.get('value')} />;
     }
 
+    let statusAvatar;
+    if (!overlayEmoji.name) {
+      statusAvatar = <Avatar account={account} size={size} />;
+    } else {
+      statusAvatar = <AvatarOverlay account={account} emoji={overlayEmoji} baseSize={size} />;
+    }
+
     return (
       <div className={classNames('account', { 'account--minimal': minimal })}>
         <div className='account__wrapper'>
           <Permalink key={account.get('id')} className='account__display-name' title={account.get('acct')} href={account.get('url')} to={`/@${account.get('acct')}`}>
             <div className='account__avatar-wrapper'>
-              <Avatar account={account} size={size} />
+              {statusAvatar}
             </div>
 
             <div className='account__contents'>

@@ -38,6 +38,7 @@ import search from './search';
 import server from './server';
 import settings from './settings';
 import status_lists from './status_lists';
+import status_reactions from './status_reactions';
 import statuses from './statuses';
 import suggestions from './suggestions';
 import tags from './tags';
@@ -88,6 +89,7 @@ const reducers = {
   history,
   tags,
   followed_tags,
+  status_reactions,
 };
 
 // We want the root state to be an ImmutableRecord, which is an object with a defined list of keys,
