@@ -41,10 +41,6 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
     )
   end
 
-  def reject_pattern?
-    Setting.reject_pattern.present? && @object['content']&.match?(Setting.reject_pattern)
-  end
-
   def create_status
     return reject_payload! if unsupported_object_type? || non_matching_uri_hosts?(@account.uri, object_uri) || tombstone_exists? || !related_to_local_activity? || reject_pattern?
 
@@ -498,6 +494,10 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
 
   def tombstone_exists?
     Tombstone.exists?(uri: object_uri)
+  end
+
+  def reject_pattern?
+    Setting.reject_pattern.present? && @object['content']&.match?(Setting.reject_pattern)
   end
 
   def forward_for_reply

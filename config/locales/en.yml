@@ -1223,7 +1223,7 @@ en:
   applications:
     created: Application successfully created
     destroyed: Application successfully deleted
-    invalid_regexp: "The provided Regexp is invalid: %{message}"
+    invalid_regexp: 'The provided Regexp is invalid: %{message}'
     logout: Logout
     regenerate_token: Regenerate access token
     token_regenerated: Access token successfully regenerated
