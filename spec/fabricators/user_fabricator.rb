@@ -8,3 +8,7 @@ Fabricator(:user) do
   current_sign_in_at { Time.zone.now }
   agreement true
 end
+
+Fabricator(:moderator_user, :from => :user) do
+  role { Fabricate(:moderator_role) }
+end

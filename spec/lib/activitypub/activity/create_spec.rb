@@ -1158,5 +1158,66 @@ RSpec.describe ActivityPub::Activity::Create do
         expect(sender.statuses.count).to eq 0
       end
     end
+
+    context 'with automod active' do
+      subject { described_class.new(json, sender, delivery: true) }
+
+      let(:recipient_a) { Fabricate(:account) }
+      let(:recipient_b) { Fabricate(:account) }
+      let(:staff_user) { Fabricate(:moderator_user) }
+
+      let(:object_json) do
+        {
+          id: [ActivityPub::TagManager.instance.uri_for(sender), '#bar'].join,
+          type: 'Note',
+          content: 'Lorem ipsum',
+          cc: ActivityPub::TagManager.instance.uri_for(recipient_a),
+          tag: recipients.map do |recipient|
+            {
+              type: 'Mention',
+              href: ActivityPub::TagManager.instance.uri_for(recipient),
+            }
+          end,
+        }
+      end
+
+      before do
+        allow(Rails.configuration.x.th_automod).to receive(:automod_account_username).and_return(staff_user.account.username)
+        allow(Rails.configuration.x.th_automod).to receive(:mention_spam_heuristic_auto_limit_active).and_return(true)
+        allow(Rails.configuration.x.th_automod).to receive(:mention_spam_threshold).and_return(2)
+        allow(subject).to receive(:distribute)
+        allow(sender).to receive(:silence!).and_call_original
+        subject.perform
+      end
+
+      context 'and spammy message' do
+        let(:recipients) { [recipient_a, recipient_b] }
+
+        it 'silences the sender' do
+          expect(sender).to have_received(:silence!)
+          expect(sender.silenced?).to be_truthy
+        end
+
+        it 'skips distribution' do
+          expect(subject).not_to have_received(:distribute)
+        end
+
+        it 'files a tracking report' do
+          expect(sender.previous_strikes_count).to be_truthy
+        end
+      end
+
+      context 'and hammy message' do
+        let(:recipients) { [recipient_a] }
+
+        it 'does not silence the sender' do
+          expect(sender.silenced?).to be_falsy
+        end
+
+        it 'does not file a tracking report' do
+          expect(sender.reports.empty?).to be_truthy
+        end
+      end
+    end
   end
 end

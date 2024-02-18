@@ -113,5 +113,10 @@ module Mastodon
     config.x.th_automod.automod_account_username = ENV['TH_STAFF_ACCOUNT']
     config.x.th_automod.account_service_heuristic_auto_suspend_active = ENV.fetch('TH_ACCOUNT_SERVICE_HEURISTIC_AUTO_SUSPEND', '') == 'that-one-spammer'
     config.x.th_automod.mention_spam_heuristic_auto_limit_active = ENV.fetch('TH_MENTION_SPAM_HEURISTIC_AUTO_LIMIT_ACTIVE', '') == 'can-spam'
+    config.x.th_automod.mention_spam_threshold =
+      begin
+        value = ENV.fetch('TH_MENTION_SPAM_THRESHOLD', '0').to_i
+        value == 0 ? Float::INFINITY : value
+      end
   end
 end

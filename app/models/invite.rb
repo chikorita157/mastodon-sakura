@@ -40,4 +40,32 @@ class Invite < ApplicationRecord
       break if Invite.find_by(code: code).nil?
     end
   end
+
+  def created_by_moderator?
+    self.user.can?(:manage_invites)
+  end
+
+  def th_use_invite_quota?
+    TH_USE_INVITE_QUOTA
+  end
+
+  def expires_in_at_most_one_week?
+    return if self.expires_in.to_i.seconds <= 1.week
+    # FIXME: Localize this
+    errors.add(:expires_in, 'must expire within one week')
+  end
+
+  def reasonable_outstanding_invite_count?
+    valid_invites = self.user.invites.filter { |i| i.valid_for_use? }
+    count = valid_invites.sum do |i|
+      next i.max_uses unless i.max_uses.nil?
+
+      errors.add(:max_uses, 'must not have any active unlimited-use invites')
+      return
+    end
+
+    return if count + max_uses <= TH_ACTIVE_INVITE_SLOT_QUOTA
+    errors.add(:max_uses, "must not exceed active invite slot quota of #{TH_ACTIVE_INVITE_SLOT_QUOTA}")
+  end
+
 end

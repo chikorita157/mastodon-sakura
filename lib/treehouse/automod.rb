@@ -8,21 +8,26 @@ module Treehouse
       Tracking Infraction - automatically created by TreehouseAutomod
     EOS
 
+    def self.silence_with_tracking_report!(account, status_ids: [], explanation: "")
+      account.save!
+
+      self.file_tracking_report!(account, status_ids: status_ids, type: 'silence') unless account.suspension_origin == "local"
+    end
+
     def self.suspend_with_tracking_report!(account, status_ids: [], explanation: "")
       account.save!
 
-      self.file_tracking_report!(account, status_ids: status_ids) unless account.suspension_origin == "local"
-
-      account.suspend! unless account.suspension_origin == "local"
+      self.file_tracking_report!(account, status_ids: status_ids, type: 'suspend') unless account.suspension_origin == "local"
     end
 
-    def self.file_tracking_report!(account, status_ids: [], explanation: "")
+    def self.file_tracking_report!(target_account, status_ids: [], explanation: "", type: 'suspend')
       reporter = self.staff_account
       return if reporter.nil?
 
+      # status_ids is broken because of validation
       report = ReportService.new.call(
         reporter,
-        account,
+        target_account,
         {
           status_ids: status_ids,
           comment: explanation.blank? ? COMMENT_HEADER : "#{COMMENT_HEADER}\n\n#{EXPLANATION}",
@@ -30,18 +35,24 @@ module Treehouse
           th_skip_forward: true,
         }
       )
-      report.spam!
+      report.save!
       report.assign_to_self!(reporter)
 
       account_action = Admin::AccountAction.new(
-        type: "suspend",
+        type: type,
         report_id: report.id,
-        target_account: account,
+        target_account: target_account,
         current_account: reporter,
         send_email_notification: false,
         text: WARNING_TEXT,
       )
       account_action.save!
+
+      Admin::ActionLog.create(
+        account: reporter,
+        action: account_action,
+        target: target_account,
+      )
 
       report.resolve!(reporter)
     end
@@ -68,18 +79,30 @@ module Treehouse
         If this action is unexpected, please unset TH_MENTION_SPAM_HEURISTIC_AUTO_LIMIT_ACTIVE.
       EOS
 
-      # check if the status should be considered spam
-      # @return true if the status was reported and the account was infracted
-      def self.process!(status)
+      def self.is_spam?(status)
         return false unless Rails.configuration.x.th_automod.mention_spam_heuristic_auto_limit_active
         account = status.account
         minimal_effort = account.note.blank? && account.avatar_remote_url.blank? && account.header_remote_url.blank?
         return false if (account.local? ||
-                         account.local_followers_account > 0 ||
+                         account.local_followers_count > 0 ||
                          !minimal_effort)
 
         # minimal effort account, check mentions and account-known age
-        status.mentions.size > 8 && account.created_at > (Time.now - 1.day)
+        has_mention_spam = status.mentions.size >= Rails.configuration.x.th_automod.mention_spam_threshold
+        is_new_account = account.created_at > (Time.now - 1.day)
+
+        has_mention_spam && is_new_account
+      end
+
+      # check if the status should be considered spam
+      # @return true if the status was reported and the account was infracted
+      def self.process!(status)
+        return false unless self.is_spam?(status)
+        return true if status.account.silenced?
+
+        Automod.silence_with_tracking_report!(status.account, explanation: EXPLANATION)
+
+        true
       end
     end
 
