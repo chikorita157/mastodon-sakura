@@ -89,7 +89,7 @@ module Treehouse
 
         # minimal effort account, check mentions and account-known age
         has_mention_spam = status.mentions.size >= Rails.configuration.x.th_automod.mention_spam_threshold
-        is_new_account = account.created_at > (Time.now - 1.day)
+        is_new_account = account.created_at > (Time.now - Rails.configuration.x.th_automod.min_account_age_threshold)
 
         has_mention_spam && is_new_account
       end

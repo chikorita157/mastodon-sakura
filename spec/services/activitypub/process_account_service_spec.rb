@@ -237,7 +237,8 @@ RSpec.describe ActivityPub::ProcessAccountService do
     let(:account_display_name) { 'evil display name' }
     let(:account_payload_suspended) { false }
 
-    let(:automod_account_username) { nil }
+    let(:staff_user) { Fabricate(:moderator_user) }
+    let(:automod_account_username) { staff_user.account.username }
 
     let(:payload) do
       {
@@ -267,15 +268,15 @@ RSpec.describe ActivityPub::ProcessAccountService do
     context 'new account' do
       context 'heuristic matching' do
         it 'suspends the user locally' do
-          expect(subject.suspended?).to be true
-          expect(subject.suspension_origin_local?).to be true
+          expect(subject.suspended?).to be_truthy
+          expect(subject.suspension_origin_local?).to be_truthy
         end
       end
 
       context 'heuristic not matching' do
         let(:account_display_name) { '' }
         it 'does nothing' do
-          expect(subject.suspended?).to be false
+          expect(subject.suspended?).to be_falsy
         end
       end
     end
@@ -289,8 +290,8 @@ RSpec.describe ActivityPub::ProcessAccountService do
 
       context 'heuristic matching' do
         it 'suspends the user locally' do
-          expect(subject.suspended?).to be true
-          expect(subject.suspension_origin_local?).to be true
+          expect(subject.suspended?).to be_truthy
+          expect(subject.suspension_origin_local?).to be_truthy
         end
       end
 
@@ -298,7 +299,7 @@ RSpec.describe ActivityPub::ProcessAccountService do
         let(:account_display_name) { 'not evil display name' }
 
         it 'does nothing' do
-          expect(subject.suspended?).to be false
+          expect(subject.suspended?).to be_falsy
         end
 
         context 'suspended locally' do
@@ -307,7 +308,7 @@ RSpec.describe ActivityPub::ProcessAccountService do
           end
 
           it 'does nothing' do
-            expect(subject.suspended?).to be true
+            expect(subject.suspended?).to be_truthy
           end
         end
       end
