@@ -118,5 +118,6 @@ module Mastodon
         value = ENV.fetch('TH_MENTION_SPAM_THRESHOLD', '0').to_i
         value == 0 ? Float::INFINITY : value
       end
+    config.x.th_automod.min_account_age_threshold = ENV.fetch('TH_MIN_ACCOUNT_AGE_THRESHOLD', '2').to_i.days
   end
 end
