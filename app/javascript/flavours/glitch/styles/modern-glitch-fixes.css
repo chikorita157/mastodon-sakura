@@ -40,6 +40,22 @@ body.app-body.flavour-glitch > #mastodon .collapsed .status__content br {
 body.app-body.flavour-glitch > #mastodon .collapsed .status__content::after {
   content: unset;
 }
+
+body.app-body.flavour-glitch > #mastodon .collapsed .status__action-bar :not(i),
+body.app-body.flavour-glitch
+  > #mastodon
+  .collapsed
+  .detailed-status__action-bar
+  :not(i),
+body.app-body.flavour-glitch
+  > #mastodon
+  .collapsed
+  .picture-in-picture__footer
+  :not(i) {
+  height: unset !important;
+  width: unset !important;
+}
+
 body.app-body.flavour-glitch > #mastodon .collapsed.muted .status__content__text ~ * {
   display: none;
 }
@@ -92,7 +108,6 @@ body.app-body.flavour-glitch > #mastodon .reactions-bar {
 body.app-body.flavour-glitch > #mastodon .reactions-bar button {
   border-radius: 6px !important;
   padding-block: 2px;
-  border: 1px solid var(--border-color-2);
 }
 body.app-body.flavour-glitch > #mastodon .reactions-bar button .reactions-bar__item__emoji {
   height: 2em;
