@@ -22,5 +22,9 @@ So here's the deal: we all work on this code, and anyone who uses that does so a
 # Our Additional Changes
 - Add Mastodon Modern Theme by [Freeplay](https://codeberg.org/Freeplay/Mastodon-Modern) with color variants we have already
 - Footer links and login tweaks
-- Holiday Themes Added
+- Additional themes Added
 - Mastodon-bird-ui theme by [ronilaukkarinen](https://github.com/ronilaukkarinen/mastodon-bird-ui/blob/master/style.css)
+- Reject patterns and Blur Hash filtering from Fedibird, cherrypicked and made compatible for GlitchSoc
+- Reject disabled hashtags.
+- Enable polls with media (cherrypicked from [Chuckya](https://github.com/TheEssem/mastodon) fork)
+- Tennor Gif Picker (cherrypicked from [Chuckya](https://github.com/TheEssem/mastodon) fork)
