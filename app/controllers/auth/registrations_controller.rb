@@ -18,6 +18,7 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   before_action :set_rules, only: :new
   before_action :require_rules_acceptance!, only: :new
   before_action :set_registration_form_time, only: :new
+  before_action :set_external_verification, only: :edit
 
   skip_before_action :check_self_destruct!, only: [:edit, :update]
   skip_before_action :require_functional!, only: [:edit, :update]
@@ -96,6 +97,10 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   end
 
   private
+
+  def set_external_verification
+    @external_verification = ExternalVerification.find_by(account_id: current_account.id)
+  end
 
   def set_pack
     use_pack %w(edit update).include?(action_name) ? 'admin' : 'auth'

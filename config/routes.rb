@@ -86,7 +86,8 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get '/invite/:invite_code', to: 'auth/registrations#new', as: :public_invite
-
+    get '/external_verification/first', to: 'external_verifications#first'
+    get '/external_verification/:id', to: 'external_verifications#save'
     resource :unsubscribe, only: [:show, :create], controller: :mail_subscriptions
 
     namespace :auth do

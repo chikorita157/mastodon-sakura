@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_11_033014) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_06_080317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -451,6 +451,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_033014) do
     t.datetime "updated_at", precision: nil, null: false
     t.index ["device_id"], name: "index_encrypted_messages_on_device_id"
     t.index ["from_account_id"], name: "index_encrypted_messages_on_from_account_id"
+  end
+
+  create_table "external_verifications", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "external_type"
+    t.string "challenge"
+    t.string "external_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_external_verifications_on_account_id"
+    t.index ["external_type", "external_id"], name: "index_external_verifications_on_external_type_and_external_id", unique: true
   end
 
   create_table "favourites", force: :cascade do |t|
@@ -1241,6 +1252,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_033014) do
   add_foreign_key "email_domain_blocks", "email_domain_blocks", column: "parent_id", on_delete: :cascade
   add_foreign_key "encrypted_messages", "accounts", column: "from_account_id", on_delete: :cascade
   add_foreign_key "encrypted_messages", "devices", on_delete: :cascade
+  add_foreign_key "external_verifications", "accounts"
   add_foreign_key "favourites", "accounts", name: "fk_5eb6c2b873", on_delete: :cascade
   add_foreign_key "favourites", "statuses", name: "fk_b0e856845e", on_delete: :cascade
   add_foreign_key "featured_tags", "accounts", on_delete: :cascade

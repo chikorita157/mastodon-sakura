@@ -5,7 +5,7 @@
   .flash-message.warning
     = t('auth.status.self_destruct', domain: ENV.fetch('LOCAL_DOMAIN'))
 - else
-  = render partial: 'status', locals: { user: @user, strikes: @strikes }
+  = render partial: 'status', locals: { user: @user, strikes: @strikes, external_verification: @external_verification }
 
 %h3= t('auth.security')
 

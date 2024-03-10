@@ -11,7 +11,6 @@
     = link_to t('migrations.cancel'), settings_migration_path
 
 %h3= t('auth.status.account_status')
-
 %p.hint
   - if user.account.suspended?
     %span.negative-hint= t('user_mailer.warning.explanation.suspend')
@@ -19,6 +18,10 @@
     %span.negative-hint= t('user_mailer.warning.explanation.disable')
   - elsif user.account.silenced?
     %span.warning-hint= t('user_mailer.warning.explanation.silence')
+  - elsif !user.approved?
+    %span.warning-hint="Our staff may contact you via E-mail to get more information for approval."
+    - if (ENV['ANILIST_ID'] && ENV['ANILIST_SECRET']) || (ENV['MAL_ID'] && ENV['MAL_SECRET'])
+      = react_admin_component :external_verification, anilist_id: ENV['ANILIST_ID'], mal_id: ENV['MAL_ID'], base_url: "https://#{ENV['LOCAL_DOMAIN']}"
   - else
     %span.positive-hint= t('auth.status.functional')
 
