@@ -89,6 +89,15 @@
   .status__content[data-spoiler='folded'] {
     .e-content {
       display: none;
+      .emojione {
+        transition-duration:0.08s;
+      }
+
+      .emojione:hover {
+        transform: scale(1.8);
+        filter: drop-shadow(0 0 3px #0c0c0c);
+        z-index:99;
+      }
     }
 
     p:first-child {
