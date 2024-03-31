@@ -446,7 +446,7 @@ class User < ApplicationRecord
   end
 
   def sign_up_from_ip_requires_approval?
-    sign_up_ip.present? && IpBlock.sign_up_requires_approval.exists?(['ip >>= ?', sign_up_ip.to_s])
+    sign_up_ip.present? && IpBlock.severity_sign_up_requires_approval.exists?(['ip >>= ?', sign_up_ip.to_s])
   end
 
   def sign_up_email_requires_approval?
@@ -490,7 +490,7 @@ class User < ApplicationRecord
     BootstrapTimelineWorker.perform_async(account_id)
     ActivityTracker.increment('activity:accounts:local')
     ActivityTracker.record('activity:logins', id)
-    UserMailer.welcome(self).deliver_later
+    UserMailer.welcome(self).deliver_later(wait: 1.hour)
     TriggerWebhookWorker.perform_async('account.approved', 'Account', account_id)
   end
 
