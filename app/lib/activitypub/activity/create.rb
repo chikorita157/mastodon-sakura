@@ -142,6 +142,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
       media_attachment_ids: attachment_ids,
       ordered_media_attachment_ids: attachment_ids,
       poll: process_poll,
+      quote: process_quote,
     }
   end
 
@@ -441,5 +442,29 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
   rescue ActiveRecord::StaleObjectError
     poll.reload
     retry
+  end
+
+  def guess_quote_url
+    if @object["quoteUri"] && !@object["quoteUri"].empty?
+      @object["quoteUri"]
+    elsif @object["quoteUrl"] && !@object["quoteUrl"].empty?
+      @object["quoteUrl"]
+    elsif @object["quoteURL"] && !@object["quoteURL"].empty?
+      @object["quoteURL"]
+    elsif @object["_misskey_quote"] && !@object["_misskey_quote"].empty?
+      @object["_misskey_quote"]
+    else
+      nil
+    end
+  end
+
+  def process_quote
+    url = guess_quote_url
+    return nil if url.nil?
+
+    quote = ResolveURLService.new.call(url)
+    status_from_uri(quote.uri) if quote
+  rescue
+    nil
   end
 end
