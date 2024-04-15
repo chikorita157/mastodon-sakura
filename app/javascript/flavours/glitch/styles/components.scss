@@ -1055,7 +1055,8 @@ body > [data-popper-placement] {
   }
 
   p,
-  pre {
+  pre,
+  blockquote {
     margin-bottom: 20px;
     white-space: pre-wrap;
     unicode-bidi: plaintext;
