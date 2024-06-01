@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { openModal } from 'mastodon/actions/modal';
+import { identityContextPropShape, withIdentity } from 'mastodon/identity_context';
 import { domain, version, source_url, statusPageUrl, profile_directory as profileDirectory } from 'mastodon/initial_state';
 import { PERMISSION_INVITE_USERS } from 'mastodon/permissions';
 import { logOut } from 'mastodon/utils/log_out';
@@ -32,12 +33,9 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
 });
 
 class LinkFooter extends PureComponent {
-
-  static contextTypes = {
-    identity: PropTypes.object,
-  };
-
   static propTypes = {
+    identity: identityContextPropShape,
+    multiColumn: PropTypes.bool,
     onLogout: PropTypes.func.isRequired,
     intl: PropTypes.object.isRequired,
   };
@@ -52,7 +50,8 @@ class LinkFooter extends PureComponent {
   };
 
   render () {
-    const { signedIn, permissions } = this.context.identity;
+    const { signedIn, permissions } = this.props.identity;
+    const { multiColumn } = this.props;
 
     const canInvite = signedIn && ((permissions & PERMISSION_INVITE_USERS) === PERMISSION_INVITE_USERS);
     const canProfileDirectory = profileDirectory;
@@ -61,25 +60,28 @@ class LinkFooter extends PureComponent {
 
     return (
       <div className='link-footer'>
-        <p>
-          <strong>Sakurajima is a donor sponsored instance.</strong> You can support us at:
-          {' '}
-           <a key='paypal' href='https://www.paypal.com/donate/?hosted_button_id=HREN4ATRLZ54S'>Paypal</a>
-          {' · '}
-          <a key='kofi' href='https://ko-fi.com/V7V8GAJR9'>Ko-Fi</a>
-          {' · '}
-          <a key='patreon' href='https://www.patreon.com/sakurajimamastodon'>Patreon</a>
+      <p>
+        Used to Twitter and Mastodon FE too hard? Try our <a href="https://elk.sakurajima.moe/">Elk Frontend</a>
+      </p>
+      <p>
+        <strong>Sakurajima is a donor sponsored instance.</strong> You can support us at:
+        {' '}
+         <a key='paypal' href='https://www.paypal.com/donate/?hosted_button_id=HREN4ATRLZ54S'>Paypal</a>
+        {' · '}
+        <a key='kofi' href='https://ko-fi.com/V7V8GAJR9'>Ko-Fi</a>
+        {' · '}
+        <a key='patreon' href='https://www.patreon.com/sakurajimamastodon'>Patreon</a>
         </p>
         <p>
           <strong>{domain}</strong>:
           {' '}
-          <Link to='/about'><FormattedMessage id='footer.about' defaultMessage='About' /></Link>
+          <Link to='/about' target={multiColumn ? '_blank' : undefined}><FormattedMessage id='footer.about' defaultMessage='About' /></Link>
           {' · '}
           <a key='misskey' href='https://sakurajima.social'>Misskey</a>
           {' · '}
           <a key='forums' href='https://forums.sakurajima.moe'>Forums</a>
-            {' · '}
-            <a key='blog' href='https://blog.sakurajima.moe'>Blog</a>
+          {' · '}
+          <a key='blog' href='https://blog.sakurajima.moe'>Blog</a>
           {statusPageUrl && (
             <>
               {DividingCircle}
@@ -99,7 +101,7 @@ class LinkFooter extends PureComponent {
             </>
           )}
           {DividingCircle}
-          <Link to='/privacy-policy'><FormattedMessage id='footer.privacy_policy' defaultMessage='Privacy policy' /></Link>
+          <Link to='/privacy-policy' target={multiColumn ? '_blank' : undefined}><FormattedMessage id='footer.privacy_policy' defaultMessage='Privacy policy' /></Link>
         </p>
 
         <p>
@@ -121,4 +123,4 @@ class LinkFooter extends PureComponent {
 
 }
 
-export default injectIntl(connect(null, mapDispatchToProps)(LinkFooter));
+export default injectIntl(withIdentity(connect(null, mapDispatchToProps)(LinkFooter)));
