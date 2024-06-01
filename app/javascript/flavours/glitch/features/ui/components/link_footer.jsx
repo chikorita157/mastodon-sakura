@@ -73,7 +73,6 @@ class LinkFooter extends PureComponent {
       <a key='patreon' href='https://www.patreon.com/sakurajimamastodon'>Patreon</a>
       </p>
     <p>
-    <p>
       <strong>{domain}</strong>:
       {' '}
       <Link to='/about' target={multiColumn ? '_blank' : undefined}><FormattedMessage id='footer.about' defaultMessage='About' /></Link>
