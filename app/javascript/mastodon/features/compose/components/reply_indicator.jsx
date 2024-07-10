@@ -24,7 +24,7 @@ export const ReplyIndicator = () => {
   const content = { __html: status.get('contentHtml') };
 
   return (
-    <div className='reply-indicator'>
+    <div className={'reply-indicator' + (quoteId ? ' reply-indicator__quote' : '')}>
       {inReplyToId && (<div className='reply-indicator__line' />)}
 
       <Link to={`/@${account.get('acct')}`} className='detailed-status__display-avatar'>
