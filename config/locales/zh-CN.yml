@@ -463,6 +463,9 @@ zh-CN:
       title: 关注推荐
       unsuppress: 恢复推荐关注
     instances:
+      audit_log:
+        title: 近期审计日志
+        view_all: 查看完整审计日志
       availability:
         description_html:
           other: 如果连续 <strong>%{count} 天</strong> 均无法成功向该域名投递消息，则将不再尝试向其投递，直至收到<em>来自</em>该域名的消息。
@@ -868,7 +871,23 @@ zh-CN:
         action: 点击这里查看更多信息
         message_html: "<strong>您的对象存储空间配置错误，您用户的隐私处于危险中。</strong>"
     tags:
+      moderation:
+        not_trendable: 不在趋势中显示
+        not_usable: 不可用
+        pending_review: 待审核
+        review_requested: 已请求审核
+        reviewed: 已审核
+        title: 状态
+        trendable: 可在趋势中显示
+        unreviewed: 未审核
+        usable: 可用
+      name: 名称
+      newest: 最新
+      oldest: 最早
+      reset: 重置
       review: 审核状态
+      search: 搜索
+      title: 话题标签
       updated_msg: 话题标签设置更新成功
     title: 管理
     trends:
