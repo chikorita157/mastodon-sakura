@@ -1,8 +1,10 @@
+import { defineMessages, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 
 import { initBlockModal } from 'flavours/glitch/actions/blocks';
 import {
   replyCompose,
+  quoteCompose,
   mentionCompose,
   directCompose,
 } from 'flavours/glitch/actions/compose';
@@ -37,6 +39,12 @@ import { deleteModal } from 'flavours/glitch/initial_state';
 import { makeGetStatus, makeGetPictureInPicture } from 'flavours/glitch/selectors';
 
 import { showAlertForError } from '../actions/alerts';
+
+const messages = defineMessages({
+  quoteConfirm: { id: 'confirmations.quote.confirm', defaultMessage: 'Quote' },
+  quoteMessage: { id: 'confirmations.quote.message', defaultMessage: 'Quoting now will overwrite the message you are currently composing. Are you sure you want to proceed?' },
+
+});
 
 const makeMapStateToProps = () => {
   const getStatus = makeGetStatus();
@@ -86,6 +94,26 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(openModal({ modalType: 'CONFIRM_REPLY', modalProps: { status, rebloggedBy } }));
       } else {
         dispatch(replyCompose(status, rebloggedBy));
+      }
+    });
+  },
+
+  onQuote (status, router) {
+    dispatch((_, getState) => {
+      let state = getState();
+
+      if (state.getIn(['local_settings', 'confirm_before_clearing_draft']) && state.getIn(['compose', 'text']).trim().length !== 0) {
+        dispatch(openModal({
+          modalType: 'CONFIRM',
+          modalProps: {
+            message: intl.formatMessage(messages.quoteMessage),
+            confirm: intl.formatMessage(messages.quoteConfirm),
+            onDoNotAsk: () => dispatch(changeLocalSetting(['confirm_before_clearing_draft'], false)),
+            onConfirm: () => dispatch(quoteCompose(status, router)),
+          },
+        }));
+      } else {
+        dispatch(quoteCompose(status, router));
       }
     });
   },
