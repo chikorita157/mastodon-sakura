@@ -1055,8 +1055,7 @@ body > [data-popper-placement] {
   }
 
   p,
-  pre,
-  blockquote {
+  pre {
     margin-bottom: 20px;
     white-space: pre-wrap;
     unicode-bidi: plaintext;
@@ -1127,18 +1126,6 @@ body > [data-popper-placement] {
 .status__content {
   // glitch: necessary for fullwidth media options
   overflow: visible;
-}
-
-.status__quote {
-  margin-bottom: 0.5em;
-  .quote-display-name {
-    .icon {
-      margin-left: -3px;
-      margin-right: 3px;
-      margin-bottom: 2px;
-      vertical-align: middle;
-    }
-  }
 }
 
 .reply-indicator {
@@ -1218,11 +1205,6 @@ body > [data-popper-placement] {
       height: 18px;
     }
   }
-}
-
-.reply-indicator__quote {
-  padding-inline-start: 10px;
-  border-inline-start: 3px solid $darker-text-color;
 }
 
 .edit-indicator {
