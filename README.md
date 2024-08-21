@@ -28,6 +28,7 @@ So here's the deal: we all work on this code, and anyone who uses that does so a
 - Reject disabled hashtags.
 - Enable polls with media (cherrypicked from [Chuckya](https://github.com/TheEssem/mastodon) fork)
 - Tennor Gif Picker (cherrypicked from [Chuckya](https://github.com/TheEssem/mastodon) fork)
+- Quote Posts (cherrypicked from [Treehouse fork](https://gitea.treehouse.systems/treehouse/mastodon))
 
 Mastodon Glitch Edition is a fork of [Mastodon](https://github.com/mastodon/mastodon). Upstream's README file is reproduced below.
 
