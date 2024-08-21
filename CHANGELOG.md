@@ -2,6 +2,70 @@
 
 All notable changes to this project will be documented in this file.
 
+## |4.2.11] - 2024-08-16
+
+### Added
+
+- Add support for incoming `<s>` tag ([mediaformat](https://github.com/mastodon/mastodon/pull/31375))
+
+### Changed
+
+- Change logic of block/mute bypass for mentions from moderators to only apply to visible roles with moderation powers ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/31271))
+
+### Fixed
+
+- Fix incorrect rate limit on PUT requests ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/31356))
+- Fix presence of `ß` in adjacent word preventing mention and hashtag matching ([adamniedzielski](https://github.com/mastodon/mastodon/pull/31122))
+- Fix processing of webfinger responses with multiple `self` links ([adamniedzielski](https://github.com/mastodon/mastodon/pull/31110))
+- Fix duplicate `orderedItems` in user archive's `outbox.json` ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/31099))
+- Fix click event handling when clicking outside of an open dropdown menu ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/31251))
+- Fix status processing failing halfway when a remote post has a malformed `replies` attribute ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/31246))
+- Fix `--verbose` option of `tootctl media remove`, which was previously erroneously removed ([mjankowski](https://github.com/mastodon/mastodon/pull/30536))
+- Fix division by zero on some video/GIF files ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/30600))
+- Fix Web UI trying to save user settings despite being logged out ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/30324))
+- Fix hashtag regexp matching some link anchors ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/30190))
+- Fix local account search on LDAP login being case-sensitive ([raucao](https://github.com/mastodon/mastodon/pull/30113))
+- Fix development environment admin account not being auto-approved ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/29958))
+- Fix report reason selector in moderation interface not unselecting rules when changing category ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/29026))
+- Fix already-invalid reports failing to resolve ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/29027))
+- Fix OCR when using S3/CDN for assets ([vmstan](https://github.com/mastodon/mastodon/pull/28551))
+- Fix error when encountering malformed `Tag` objects from Kbin ([ShadowJonathan](https://github.com/mastodon/mastodon/pull/28235))
+- Fix not all allowed image formats showing in file picker when uploading custom emoji ([june128](https://github.com/mastodon/mastodon/pull/28076))
+- Fix search popout listing unusable search options when logged out ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/27918))
+- Fix processing of featured collections lacking an `items` attribute ([tribela](https://github.com/mastodon/mastodon/pull/27581))
+- Fix `mastodon:stats` decoration of stats rake task ([mjankowski](https://github.com/mastodon/mastodon/pull/31104))
+
+## [4.2.10] - 2024-07-04
+
+### Security
+
+- Fix incorrect permission checking on multiple API endpoints ([GHSA-58x8-3qxw-6hm7](https://github.com/mastodon/mastodon/security/advisories/GHSA-58x8-3qxw-6hm7))
+- Fix incorrect authorship checking when processing some activities (CVE-2024-37903, [GHSA-xjvf-fm67-4qc3](https://github.com/mastodon/mastodon/security/advisories/GHSA-xjvf-fm67-4qc3))
+- Fix ongoing streaming sessions not being invalidated when application tokens get revoked ([GHSA-vp5r-5pgw-jwqx](https://github.com/mastodon/mastodon/security/advisories/GHSA-vp5r-5pgw-jwqx))
+- Update dependencies
+
+### Added
+
+- Add yarn version specification to avoid confusion with Yarn 3 and Yarn 4
+
+### Changed
+
+- Change preview cards generation to skip unusually long URLs ([oneiros](https://github.com/mastodon/mastodon/pull/30854))
+- Change search modifiers to be case-insensitive ([Gargron](https://github.com/mastodon/mastodon/pull/30865))
+- Change `STATSD_ADDR` handling to emit a warning rather than crashing if the address is unreachable ([timothyjrogers](https://github.com/mastodon/mastodon/pull/30691))
+- Change PWA start URL from `/home` to `/` ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/27377))
+
+### Removed
+
+- Removed dependency on `posix-spawn` ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/18559))
+
+### Fixed
+
+- Fix scheduled statuses scheduled in less than 5 minutes being immediately published ([danielmbrasil](https://github.com/mastodon/mastodon/pull/30584))
+- Fix encoding detection for link cards ([oneiros](https://github.com/mastodon/mastodon/pull/30780))
+- Fix `/admin/accounts/:account_id/statuses/:id` for edited posts with media attachments ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/30819))
+- Fix duplicate `@context` attribute in user archive export ([ClearlyClaire](https://github.com/mastodon/mastodon/pull/30653))
+
 ## [4.2.9] - 2024-05-30
 
 ### Security

@@ -4,7 +4,6 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 
 import classNames from 'classnames';
 
-import { List as ImmutableList } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 
@@ -83,7 +82,7 @@ class Status extends ImmutablePureComponent {
     containerId: PropTypes.string,
     id: PropTypes.string,
     status: ImmutablePropTypes.map,
-    account: PropTypes.oneOfType([ImmutablePropTypes.record, ImmutablePropTypes.listOf(ImmutablePropTypes.record)]),
+    account: ImmutablePropTypes.record,
     previousId: PropTypes.string,
     nextInReplyToId: PropTypes.string,
     rootId: PropTypes.string,
@@ -121,6 +120,8 @@ class Status extends ImmutablePureComponent {
     cacheMediaWidth: PropTypes.func,
     cachedMediaWidth: PropTypes.number,
     scrollKey: PropTypes.string,
+    skipPrepend: PropTypes.bool,
+    avatarSize: PropTypes.number,
     deployPictureInPicture: PropTypes.func,
     settings: ImmutablePropTypes.map.isRequired,
     pictureInPicture: ImmutablePropTypes.contains({
@@ -445,7 +446,7 @@ class Status extends ImmutablePureComponent {
 
   handleHotkeyReply = e => {
     e.preventDefault();
-    this.props.onReply(this.props.status, this.props.history);
+    this.props.onReply(this.props.status);
   };
 
   handleHotkeyFavourite = (e) => {
@@ -462,7 +463,7 @@ class Status extends ImmutablePureComponent {
 
   handleHotkeyMention = e => {
     e.preventDefault();
-    this.props.onMention(this.props.status.get('account'), this.props.history);
+    this.props.onMention(this.props.status.get('account'));
   };
 
   handleHotkeyOpen = () => {
@@ -523,12 +524,14 @@ class Status extends ImmutablePureComponent {
   }
 
   render () {
+    const { intl, hidden, featured, unfocusable, unread, pictureInPicture, previousId, nextInReplyToId, rootId, skipPrepend, avatarSize = 46 } = this.props;
+
     const {
       parseClick,
       setCollapsed,
     } = this;
+
     const {
-      intl,
       status,
       account,
       settings,
@@ -538,13 +541,6 @@ class Status extends ImmutablePureComponent {
       onOpenVideo,
       onOpenMedia,
       notification,
-      hidden,
-      unread,
-      featured,
-      pictureInPicture,
-      previousId,
-      nextInReplyToId,
-      rootId,
       history,
       identity,
       ...other
@@ -562,8 +558,6 @@ class Status extends ImmutablePureComponent {
     let extraMediaIcons = [];
     let media = contentMedia;
     let mediaIcons = contentMediaIcons;
-
-    const accounts = ImmutableList.isList(account) ? account : ImmutableList.of(account);
 
     if (settings.getIn(['content_warnings', 'media_outside'])) {
       media = extraMedia;
@@ -596,8 +590,8 @@ class Status extends ImmutablePureComponent {
 
     if (hidden) {
       return (
-        <HotKeys handlers={handlers}>
-          <div ref={this.handleRef} className='status focusable' tabIndex={0}>
+        <HotKeys handlers={handlers} tabIndex={unfocusable ? null : -1}>
+          <div ref={this.handleRef} className='status focusable' tabIndex={unfocusable ? null : 0}>
             <span>{status.getIn(['account', 'display_name']) || status.getIn(['account', 'username'])}</span>
             <span>{status.get('content')}</span>
           </div>
@@ -617,8 +611,8 @@ class Status extends ImmutablePureComponent {
       };
 
       return (
-        <HotKeys handlers={minHandlers}>
-          <div className='status__wrapper status__wrapper--filtered focusable' tabIndex={0} ref={this.handleRef}>
+        <HotKeys handlers={minHandlers} tabIndex={unfocusable ? null : -1}>
+          <div className='status__wrapper status__wrapper--filtered focusable' tabIndex={unfocusable ? null : 0} ref={this.handleRef}>
             <FormattedMessage id='status.filtered' defaultMessage='Filtered' />: {matchedFilters.join(', ')}.
             {' '}
             <button className='status__wrapper--filtered__button' onClick={this.handleUnfilterClick}>
@@ -763,7 +757,7 @@ class Status extends ImmutablePureComponent {
       'data-status-by': `@${status.getIn(['account', 'acct'])}`,
     };
 
-    if (this.props.prepend && accounts) {
+    if (this.props.prepend && account) {
       const notifKind = {
         favourite: 'favourited',
         reaction: 'reacted',
@@ -772,13 +766,12 @@ class Status extends ImmutablePureComponent {
         status: 'posted',
       }[this.props.prepend];
 
-      selectorAttribs[`data-${notifKind}-by`] = accounts.map(acct => `@${acct.get('acct')}`).join(',');
+      selectorAttribs[`data-${notifKind}-by`] = `@${account.get('acct')}`;
 
       prepend = (
         <StatusPrepend
           type={this.props.prepend}
-          status={status}
-          accounts={accounts}
+          account={account}
           parseClick={parseClick}
           notificationId={this.props.notificationId}
         >
@@ -794,7 +787,7 @@ class Status extends ImmutablePureComponent {
     if (this.props.prepend === 'reblog') {
       rebloggedByText = intl.formatMessage(
         { id: 'status.reblogged_by', defaultMessage: '{name} boosted' },
-        { name: new Intl.ListFormat(intl.locale, { type: 'conjunction' }).format(accounts.map(acct => acct.get('acct'))) },
+        { name: account.get('acct') },
       );
     }
 
@@ -802,17 +795,17 @@ class Status extends ImmutablePureComponent {
     contentMedia.push(hashtagBar);
 
     return (
-      <HotKeys handlers={handlers}>
+      <HotKeys handlers={handlers} tabIndex={unfocusable ? null : -1}>
         <div
           className={classNames('status__wrapper', 'focusable', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), unread, collapsed: isCollapsed })}
           {...selectorAttribs}
-          tabIndex={0}
+          tabIndex={unfocusable ? null : 0}
           data-featured={featured ? 'true' : null}
           aria-label={textForScreenReader(intl, status, rebloggedByText, !status.get('hidden'))}
           ref={this.handleRef}
           data-nosnippet={status.getIn(['account', 'noindex'], true) || undefined}
         >
-          {prepend}
+          {!skipPrepend && prepend}
 
           <div
             className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), 'status--in-thread': !!rootId, 'status--first-in-thread': previousId && (!connectUp || connectToRoot), muted: this.props.muted, 'has-background': isCollapsed && background })}
@@ -825,9 +818,10 @@ class Status extends ImmutablePureComponent {
               <header className='status__info'>
                 <StatusHeader
                   status={status}
-                  friends={accounts}
+                  friend={account}
                   collapsed={isCollapsed}
                   parseClick={parseClick}
+                  avatarSize={avatarSize}
                 />
                 <StatusIcons
                   status={status}

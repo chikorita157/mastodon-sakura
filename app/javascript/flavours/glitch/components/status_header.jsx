@@ -13,7 +13,8 @@ export default class StatusHeader extends PureComponent {
 
   static propTypes = {
     status: ImmutablePropTypes.map.isRequired,
-    friends: ImmutablePropTypes.listOf(ImmutablePropTypes.map),
+    friend: ImmutablePropTypes.map,
+    avatarSize: PropTypes.number,
     parseClick: PropTypes.func.isRequired,
   };
 
@@ -32,16 +33,17 @@ export default class StatusHeader extends PureComponent {
   render () {
     const {
       status,
-      friends,
+      friend,
+      avatarSize,
     } = this.props;
 
     const account = status.get('account');
 
     let statusAvatar;
-    if (friends === undefined || friends === null || !friends.get(0)) {
-      statusAvatar = <Avatar account={account} size={46} />;
+    if (friend === undefined || friend === null) {
+      statusAvatar = <Avatar account={account} size={avatarSize} />;
     } else {
-      statusAvatar = <AvatarOverlay account={account} friend={friends.get(0)} />;
+      statusAvatar = <AvatarOverlay account={account} friend={friend} />;
     }
 
     return (
@@ -51,6 +53,7 @@ export default class StatusHeader extends PureComponent {
         target='_blank'
         onClick={this.handleAccountClick}
         rel='noopener noreferrer'
+        title={status.getIn(['account', 'acct'])}
         data-hover-card-account={status.getIn(['account', 'id'])}
       >
         <div className='status__avatar'>

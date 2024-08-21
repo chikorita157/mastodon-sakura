@@ -53,6 +53,7 @@ const initialState = ImmutableMap({
 
     dismissPermissionBanner: false,
     showUnread: true,
+    minimizeFilteredBanner: false,
 
     shows: ImmutableMap({
       follow: true,
@@ -80,12 +81,6 @@ const initialState = ImmutableMap({
       update: true,
       'admin.sign_up': true,
       'admin.report': true,
-    }),
-
-    grouping: ImmutableMap({
-      reaction: true,
-      favourite: true,
-      reblog: true,
     }),
   }),
 
