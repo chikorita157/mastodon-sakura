@@ -3,7 +3,7 @@
 
 .status{ class: "status-#{status.visibility}" }
   .status__info
-    = link_to ActivityPub::TagManager.instance.url_for(status), class: 'status__relative-time u-url u-uid', target: stream_link_target, rel: 'noopener noreferrer' do
+    = link_to ActivityPub::TagManager.instance.url_for(status), class: 'status__relative-time u-url u-uid', target: stream_link_target, rel: 'noopener' do
       %span.status__visibility-icon><
         = visibility_icon status
       %time.time-ago{ datetime: status.created_at.iso8601, title: l(status.created_at) }= l(status.created_at)
@@ -13,7 +13,7 @@
     %data.dt-published{ value: status.created_at.to_time.iso8601 }
 
     .p-author.h-card
-      = link_to ActivityPub::TagManager.instance.url_for(status.account), class: 'status__display-name u-url', target: stream_link_target, rel: 'noopener noreferrer' do
+      = link_to ActivityPub::TagManager.instance.url_for(status.account), class: 'status__display-name u-url', target: stream_link_target, rel: 'noopener' do
         .status__avatar
           %div
             - if prefers_autoplay?
@@ -54,7 +54,7 @@
     = render_card_component(status)
 
   - if !status.in_reply_to_id.nil? && status.in_reply_to_account_id == status.account.id && !hide_show_thread
-    = link_to ActivityPub::TagManager.instance.url_for(status), class: 'status__content__read-more-button', target: stream_link_target, rel: 'noopener noreferrer' do
+    = link_to ActivityPub::TagManager.instance.url_for(status), class: 'status__content__read-more-button', target: stream_link_target, rel: 'noopener' do
       = t 'statuses.show_thread'
 
   .status__action-bar

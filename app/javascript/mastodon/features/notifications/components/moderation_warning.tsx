@@ -59,7 +59,7 @@ export const ModerationWarning: React.FC<Props> = ({ action, id, hidden }) => {
     <a
       href={`/disputes/strikes/${id}`}
       target='_blank'
-      rel='noopener noreferrer'
+      rel='noopener'
       className='notification__moderation-warning'
     >
       <Icon id='warning' icon={GavelIcon} />

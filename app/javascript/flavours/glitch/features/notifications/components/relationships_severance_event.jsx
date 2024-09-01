@@ -21,7 +21,7 @@ export const RelationshipsSeveranceEvent = ({ type, target, followingCount, foll
   }
 
   return (
-    <a href='/severed_relationships' target='_blank' rel='noopener noreferrer' className='notification__relationships-severance-event'>
+    <a href='/severed_relationships' target='_blank' rel='noopener' className='notification__relationships-severance-event'>
       <Icon id='heart_broken' icon={HeartBrokenIcon} />
 
       <div className='notification__relationships-severance-event__content'>

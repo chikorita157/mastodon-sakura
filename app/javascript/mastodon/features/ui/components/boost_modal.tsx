@@ -95,7 +95,7 @@ export const BoostModal: React.FC<{
               href={`/@${account.acct}/${status.get('id') as string}`}
               className='status__relative-time'
               target='_blank'
-              rel='noopener noreferrer'
+              rel='noopener'
             >
               <span className='status__visibility-icon'>
                 <VisibilityIcon visibility={statusVisibility} />

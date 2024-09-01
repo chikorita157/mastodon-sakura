@@ -54,7 +54,7 @@ class FavouriteModal extends ImmutablePureComponent {
         <div className='boost-modal__container'>
           <div className={classNames('status', `status-${status.get('visibility')}`, 'light')}>
             <div className='status__info'>
-              <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'>
+              <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener'>
                 <span className='status__visibility-icon'><VisibilityIcon visibility={status.get('visibility')} /></span>
                 <RelativeTimestamp timestamp={status.get('created_at')} />
               </a>

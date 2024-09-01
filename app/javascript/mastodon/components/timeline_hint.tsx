@@ -15,7 +15,7 @@ export const TimelineHint: React.FC<Props> = ({ resource, url }) => (
       />
     </strong>
     <br />
-    <a href={url} target='_blank' rel='noopener noreferrer'>
+    <a href={url} target='_blank' rel='noopener'>
       <FormattedMessage
         id='account.browse_more_on_origin_server'
         defaultMessage='Browse more on the original profile'

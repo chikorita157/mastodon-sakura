@@ -30,12 +30,12 @@ RSpec.describe VerifyLinkService do
       end
     end
 
-    context 'when a link contains an <a rel="noopener noreferrer"> back' do
+    context 'when a link contains an <a rel="noopener"> back' do
       let(:html) do
         <<-HTML
           <!doctype html>
           <body>
-            <a href="#{ActivityPub::TagManager.instance.url_for(account)}" rel="me noopener noreferrer" target="_blank">Follow me on Mastodon</a>
+            <a href="#{ActivityPub::TagManager.instance.url_for(account)}" rel="me noopener" target="_blank">Follow me on Mastodon</a>
           </body>
         HTML
       end

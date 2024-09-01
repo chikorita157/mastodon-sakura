@@ -393,7 +393,7 @@ class StatusContent extends PureComponent {
               </span>
             </bdi>
             <div>
-              <a href={quoteStatus.get('url')} target='_blank' rel='noopener noreferrer' dangerouslySetInnerHTML={quoteStatusContent} />
+              <a href={quoteStatus.get('url')} target='_blank' rel='noopener' dangerouslySetInnerHTML={quoteStatusContent} />
             </div>
           </blockquote>
         </div>
