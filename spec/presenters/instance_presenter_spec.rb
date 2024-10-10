@@ -85,7 +85,7 @@ RSpec.describe InstancePresenter do
       end
 
       it 'defaults to the core glitch-soc repo URL' do
-        expect(instance_presenter.source_url).to eq('https://github.com/glitch-soc/mastodon')
+        expect(instance_presenter.source_url).to eq('https://github.com/chikorita157/mastodon-sakura')
       end
     end
   end

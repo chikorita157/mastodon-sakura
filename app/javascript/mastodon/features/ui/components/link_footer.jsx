@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 
 import { Link } from 'react-router-dom';
 
@@ -11,11 +11,24 @@ import { openModal } from 'mastodon/actions/modal';
 import { identityContextPropShape, withIdentity } from 'mastodon/identity_context';
 import { domain, version, source_url, statusPageUrl, profile_directory as profileDirectory } from 'mastodon/initial_state';
 import { PERMISSION_INVITE_USERS } from 'mastodon/permissions';
+import { logOut } from 'mastodon/utils/log_out';
 
-const mapDispatchToProps = (dispatch) => ({
+const messages = defineMessages({
+  logoutMessage: { id: 'confirmations.logout.message', defaultMessage: 'Are you sure you want to log out?' },
+  logoutConfirm: { id: 'confirmations.logout.confirm', defaultMessage: 'Log out' },
+});
+
+const mapDispatchToProps = (dispatch, { intl }) => ({
   onLogout () {
-    dispatch(openModal({ modalType: 'CONFIRM_LOG_OUT' }));
-
+    dispatch(openModal({
+      modalType: 'CONFIRM',
+      modalProps: {
+        message: intl.formatMessage(messages.logoutMessage),
+        confirm: intl.formatMessage(messages.logoutConfirm),
+        closeWhenConfirm: false,
+        onConfirm: () => logOut(),
+      },
+    }));
   },
 });
 
@@ -47,13 +60,28 @@ class LinkFooter extends PureComponent {
 
     return (
       <div className='link-footer'>
-        <p>
-          New to Mastodon and want an easier transition? Try the <a href='https://elk.urusai.social/'>Alternative UI (Elk)</a> for a more &quot;bird-like&quot; interface!
+      <p>
+        Used to Twitter and Mastodon FE too hard? Try our <a href="https://elk.sakurajima.moe/">Elk Frontend</a>
+      </p>
+      <p>
+        <strong>Sakurajima is a donor sponsored instance.</strong> You can support us at:
+        {' '}
+         <a key='paypal' href='https://www.paypal.com/donate/?hosted_button_id=HREN4ATRLZ54S'>Paypal</a>
+        {' · '}
+        <a key='kofi' href='https://ko-fi.com/V7V8GAJR9'>Ko-Fi</a>
+        {' · '}
+        <a key='patreon' href='https://www.patreon.com/sakurajimamastodon'>Patreon</a>
         </p>
         <p>
           <strong>{domain}</strong>:
           {' '}
           <Link to='/about' target={multiColumn ? '_blank' : undefined}><FormattedMessage id='footer.about' defaultMessage='About' /></Link>
+          {' · '}
+          <a key='misskey' href='https://sakurajima.social'>Misskey</a>
+          {' · '}
+          <a key='forums' href='https://forums.sakurajima.moe'>Forums</a>
+          {' · '}
+          <a key='blog' href='https://blog.sakurajima.moe'>Blog</a>
           {statusPageUrl && (
             <>
               {DividingCircle}
@@ -85,7 +113,7 @@ class LinkFooter extends PureComponent {
           {DividingCircle}
           <Link to='/keyboard-shortcuts'><FormattedMessage id='footer.keyboard_shortcuts' defaultMessage='Keyboard shortcuts' /></Link>
           {DividingCircle}
-          <a href={source_url} rel='noopener noreferrer' target='_blank'><FormattedMessage id='footer.source_code' defaultMessage='View source code' /></a>
+          <a href={source_url} rel='noopener' target='_blank'><FormattedMessage id='footer.source_code' defaultMessage='View source code' /></a>
           {DividingCircle}
           <span className='version'>v{version}</span>
         </p>
