@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  background: $classic-secondary-color;
+  background: $classic-secondary-color !important;
 }
 
 .simple_form .button.button-tertiary {
@@ -509,7 +509,7 @@ body {
 }
 
 .compose-form .autosuggest-textarea__textarea, .compose-form__highlightable, .poll__option input[type=text] {
-  background-color: $ui-highlight-color;
+  background-color: $ui-highlight-color !important;
 }
 
 .compose-form .compose-form__warning {
