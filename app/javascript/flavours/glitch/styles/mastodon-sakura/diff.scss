@@ -5,10 +5,6 @@ html {
   scrollbar-color: $ui-base-color rgba($ui-base-color, 0.25);
 }
 
-:root {
-  --background-color: $ui-base-color;
-}
-
 .simple_form .button.button-tertiary {
   color: $highlight-text-color;
 }

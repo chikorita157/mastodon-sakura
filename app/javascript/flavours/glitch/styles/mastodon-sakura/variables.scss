@@ -78,4 +78,37 @@ $account-background-color: $white !default;
   );
 }
 
+:root {
+  --dropdown-border-color: #{color.adjust($ui-base-color, $lightness: 4%)};
+  --dropdown-background-color: #{rgba(
+      color.adjust($ui-base-color, $lightness: -8%),
+      0.9
+    )};
+  --dropdown-shadow: 0 20px 25px -5px #{rgba($base-shadow-color, 0.25)},
+    0 8px 10px -6px #{rgba($base-shadow-color, 0.25)};
+  --modal-background-color: #{rgba(
+      color.adjust($ui-base-color, $lightness: -8%),
+      0.7
+    )};
+  --modal-background-variant-color: #{rgba($ui-base-color, 0.7)};
+  --modal-border-color: #{color.adjust($ui-base-color, $lightness: 4%)};
+  --background-border-color: #{color.adjust($ui-base-color, $lightness: 4%)};
+  --background-filter: blur(10px) saturate(180%) contrast(75%) brightness(70%);
+  --background-color: $ui-base-color;
+  --background-color-tint: $ui-base-color;
+  --surface-background-color: #{color.adjust($ui-base-color, $lightness: -4%)};
+  --surface-variant-background-color: #{$ui-base-color};
+  --surface-variant-active-background-color: #{color.adjust(
+      $ui-base-color,
+      $lightness: 4%
+    )};
+  --on-surface-color: #{color.adjust($ui-base-color, $alpha: -0.5)};
+  --avatar-border-radius: 8px;
+  --media-outline-color: #{rgba(#fcf8ff, 0.15)};
+  --overlay-icon-shadow: drop-shadow(0 0 8px #{rgba($base-shadow-color, 0.25)});
+  --error-background-color: #{color.adjust($error-red, $lightness: -16%)};
+  --error-active-background-color: #{color.adjust($error-red, $lightness: -12%)};
+  --on-error-color: #fff;
+}
+
 $emojis-requiring-inversion: 'chains';
