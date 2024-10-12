@@ -94,8 +94,8 @@ $account-background-color: $white !default;
   --modal-border-color: #{color.adjust($ui-base-color, $lightness: 4%)};
   --background-border-color: #{color.adjust($ui-base-color, $lightness: 4%)};
   --background-filter: blur(10px) saturate(180%) contrast(75%) brightness(70%);
-  --background-color: $ui-base-color;
-  --background-color-tint: $ui-base-color;
+  --background-color: #{$ui-base-color};
+  --background-color-tint: #{$ui-base-color};
   --surface-background-color: #{color.adjust($ui-base-color, $lightness: -4%)};
   --surface-variant-background-color: #{$ui-base-color};
   --surface-variant-active-background-color: #{color.adjust(
