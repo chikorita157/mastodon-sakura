@@ -3,6 +3,7 @@
 
 html {
   scrollbar-color: $ui-base-color rgba($ui-base-color, 0.25);
+  background: $ui-base-color;
 }
 
 .simple_form .button.button-tertiary {
@@ -85,6 +86,10 @@ html {
 .report-dialog-modal__textarea,
 .audio-player {
   border: 1px solid var(--background-border-color);
+}
+
+.compose-form .autosuggest-textarea__textarea, .compose-form__highlightable, .poll__option input[type=text]
+  background: $ui-base-lighter-color;
 }
 
 .report-dialog-modal .dialog-option .poll__input {
