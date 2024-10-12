@@ -147,6 +147,7 @@ html {
 .report-dialog-modal__textarea,
 .audio-player {
   border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  background-color: $ui-highlight-color;
 }
 
 .report-dialog-modal .dialog-option .poll__input {
@@ -504,8 +505,8 @@ html {
 }
 
 .compose-form .compose-form__warning {
-  border-color: $ui-highlight-color;
-  background-color: rgba($ui-highlight-color, 0.1);
+  border-color: rgba($ui-highlight-color, 0.1);
+  background-color: $ui-highlight-color;
 
   &,
   a {
