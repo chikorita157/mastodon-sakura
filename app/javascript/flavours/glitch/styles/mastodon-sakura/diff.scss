@@ -5,6 +5,10 @@ html {
   scrollbar-color: $ui-base-color rgba($ui-base-color, 0.25);
 }
 
+body {
+  background: $classic-secondary-color;
+}
+
 .simple_form .button.button-tertiary {
   color: $highlight-text-color;
 }
@@ -502,6 +506,10 @@ html {
     color: $ui-highlight-color;
     background-color: rgba($ui-highlight-color, 0.1);
   }
+}
+
+.compose-form .autosuggest-textarea__textarea, .compose-form__highlightable, .poll__option input[type=text] {
+  background-color: $ui-highlight-color;
 }
 
 .compose-form .compose-form__warning {
