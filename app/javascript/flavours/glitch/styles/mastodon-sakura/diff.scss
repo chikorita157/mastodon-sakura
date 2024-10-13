@@ -11,7 +11,7 @@ html {
 
 .status-card__actions button,
 .status-card__actions a {
-  color: rgba($white, 0.8);
+  color: rgba($black, 0.8);
 
   &:hover,
   &:active,
@@ -21,9 +21,25 @@ html {
 }
 
 // Change default background colors of columns
+.column > .scrollable,
+.getting-started,
+.column-inline-form,
+.error-column,
+.regeneration-indicator {
+  background: $ui-base-lighter-color;
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border-top: 0;
+}
+
+.column > .scrollable.about {
+  border-top: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+}
+
+.about__meta,
+.about__section__title,
 .interaction-modal {
   background: $white;
-  border: 1px solid var(--background-border-color);
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
 }
 
 .rules-list li::before {
@@ -34,8 +50,35 @@ html {
   background: color.adjust($ui-base-color, $lightness: 12%);
 }
 
+.filter-form {
+  background: $white;
+  border-bottom: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+}
+
+.column-back-button,
+.column-header {
+  background: $white;
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+
+  @media screen and (max-width: $no-gap-breakpoint) {
+    border-top: 0;
+  }
+
+  &--slim-button {
+    top: -50px;
+    right: 0;
+  }
+}
+
+.column-header__back-button,
+.column-header__button,
+.column-header__button.active,
 .account__header {
   background: $white;
+}
+
+.column-header {
+  border-bottom: 0;
 }
 
 .column-header__button.active {
@@ -45,11 +88,12 @@ html {
   &:active,
   &:focus {
     color: $ui-highlight-color;
+    background: $white;
   }
 }
 
-.icon-button:disabled {
-  color: color.adjust($action-button-color, $lightness: -25%);
+.account__header__bar .avatar .account__avatar {
+  border-color: $white;
 }
 
 .getting-started__footer a {
@@ -70,9 +114,28 @@ html {
   }
 }
 
+.column-subheading {
+  background: color.adjust($ui-base-color, $lightness: -4%);
+  border-bottom: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+}
+
+.getting-started,
+.scrollable {
+  .column-link {
+    background: $white;
+    border-bottom: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: $ui-base-color;
+    }
+  }
+}
+
 .getting-started .navigation-bar {
-  border-top: 1px solid var(--background-border-color);
-  border-bottom: 1px solid var(--background-border-color);
+  border-top: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border-bottom: 1px solid color.adjust($ui-base-color, $lightness: 8%);
 
   @media screen and (max-width: $no-gap-breakpoint) {
     border-top: 0;
@@ -80,19 +143,14 @@ html {
 }
 
 .search__input,
-.search__popout,
 .setting-text,
 .report-dialog-modal__textarea,
 .audio-player {
-  border: 1px solid var(--background-border-color);
-}
-
-.compose-form .autosuggest-textarea__textarea, .compose-form__highlightable, .poll__option input[type=text]
-  background: $ui-base-lighter-color;
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
 }
 
 .report-dialog-modal .dialog-option .poll__input {
-  color: $white;
+  color: $ui-primary-color;
 }
 
 .search__input {
@@ -107,6 +165,23 @@ html {
   border-bottom: 0;
 }
 
+.notification__filter-bar {
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border-top: 0;
+}
+
+.drawer__header,
+.drawer__inner {
+  background: $white;
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+}
+
+.drawer__inner__mastodon {
+  background: $white
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234.80078 31.757813" width="234.80078" height="31.757812"><path d="M19.599609 0c-1.05 0-2.10039.375-2.90039 1.125L0 16.925781v14.832031h234.80078V17.025391l-16.5-15.900391c-1.6-1.5-4.20078-1.5-5.80078 0l-13.80078 13.099609c-1.6 1.5-4.19883 1.5-5.79883 0L179.09961 1.125c-1.6-1.5-4.19883-1.5-5.79883 0L159.5 14.224609c-1.6 1.5-4.20078 1.5-5.80078 0L139.90039 1.125c-1.6-1.5-4.20078-1.5-5.80078 0l-13.79883 13.099609c-1.6 1.5-4.20078 1.5-5.80078 0L100.69922 1.125c-1.600001-1.5-4.198829-1.5-5.798829 0l-13.59961 13.099609c-1.6 1.5-4.200781 1.5-5.800781 0L61.699219 1.125c-1.6-1.5-4.198828-1.5-5.798828 0L42.099609 14.224609c-1.6 1.5-4.198828 1.5-5.798828 0L22.5 1.125C21.7.375 20.649609 0 19.599609 0z" fill="#{hex-color($ui-base-color)}"/></svg>')
+    no-repeat bottom / 100% auto;
+}
+
 .upload-progress__backdrop {
   background: $ui-base-color;
 }
@@ -114,6 +189,11 @@ html {
 // Change the background colors of statuses
 .focusable:focus {
   background: color.adjust($white, $lightness: 4%);
+}
+
+.detailed-status,
+.detailed-status__action-bar {
+  background: $white;
 }
 
 // Change the background colors of status__content__spoiler-link
@@ -125,6 +205,12 @@ html {
   &:focus {
     background: color.adjust($ui-base-color, $lightness: 4%);
   }
+}
+
+// Change the background colors of media and video spoilers
+.media-spoiler,
+.video-player__spoiler {
+  background: $ui-base-color;
 }
 
 .account-gallery__item a {
@@ -140,6 +226,7 @@ html {
 .actions-modal ul li:not(:empty) a:focus button,
 .actions-modal ul li:not(:empty) a:hover,
 .actions-modal ul li:not(:empty) a:hover button,
+.admin-wrapper .sidebar ul .simple-navigation-active-leaf a,
 .simple_form .block-button,
 .simple_form .button,
 .simple_form button {
@@ -153,6 +240,28 @@ html {
 
 .report-dialog-modal__container {
   border-top-color: color.adjust($ui-base-color, $lightness: 4%);
+}
+
+// Change the background colors of modals
+.actions-modal,
+.boost-modal,
+.confirmation-modal,
+.mute-modal,
+.block-modal,
+.report-modal,
+.report-dialog-modal,
+.embed-modal,
+.error-modal,
+.onboarding-modal,
+.compare-history-modal,
+.report-modal__comment .setting-text__wrapper,
+.report-modal__comment .setting-text,
+.announcements,
+.picture-in-picture__header,
+.picture-in-picture__footer,
+.reactions-bar__item {
+  background: $white;
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
 }
 
 .reactions-bar__item:hover,
@@ -186,6 +295,20 @@ html {
 .icon-with-badge__badge {
   border-color: $white;
   color: $white;
+}
+
+.report-modal__comment {
+  border-right-color: color.adjust($ui-base-color, $lightness: 8%);
+}
+
+.report-modal__container {
+  border-top-color: color.adjust($ui-base-color, $lightness: 8%);
+}
+
+.column-header__collapsible-inner {
+  background: color.adjust($ui-base-color, $lightness: -4%);
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border-bottom: 0;
 }
 
 .column-settings__hashtags .column-select__option {
@@ -226,7 +349,7 @@ html {
 
 .embed-modal .embed-modal__container .embed-modal__html {
   background: $white;
-  border: 1px solid var(--background-border-color);
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
 
   &:focus {
     border-color: color.adjust($ui-base-color, $lightness: 12%);
@@ -235,11 +358,11 @@ html {
 }
 
 .react-toggle-track {
-  background: $ui-primary-color;
+  background: $ui-secondary-color;
 }
 
 .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
-  background: color.adjust($ui-primary-color, $lightness: 10%);
+  background: color.adjust($ui-secondary-color, $lightness: -10%);
 }
 
 .react-toggle.react-toggle--checked:hover:not(.react-toggle--disabled)
@@ -265,7 +388,25 @@ html {
 .directory__tag > a,
 .directory__tag > div {
   background: $white;
-  border: 1px solid var(--background-border-color);
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+
+  @media screen and (max-width: $no-gap-breakpoint) {
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+  }
+}
+
+.simple_form {
+  input[type='text'],
+  input[type='number'],
+  input[type='email'],
+  input[type='password'],
+  textarea {
+    &:hover {
+      border-color: color.adjust($ui-base-color, $lightness: 12%);
+    }
+  }
 }
 
 .picture-in-picture-placeholder {
@@ -280,6 +421,10 @@ html {
   &:focus {
     background: $ui-base-color;
   }
+
+  @media screen and (max-width: $no-gap-breakpoint) {
+    border: 0;
+  }
 }
 
 .batch-table {
@@ -291,7 +436,7 @@ html {
 }
 
 .activity-stream {
-  border: 1px solid var(--background-border-color);
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
 
   &--under-tabs {
     border-top: 0;
@@ -356,22 +501,6 @@ html {
     color: $ui-highlight-color;
     background-color: rgba($ui-highlight-color, 0.1);
   }
-
-  input[type='text'],
-  input[type='number'],
-  input[type='email'],
-  input[type='password'],
-  input[type='url'],
-  input[type='datetime-local'],
-  textarea {
-    background: color.adjust($ui-base-color, $lightness: -10%);
-  }
-
-  select {
-    background: color.adjust($ui-base-color, $lightness: -10%)
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.933 18.467' height='19.698' width='15.929'><path d='M3.467 14.967l-3.393-3.5H14.86l-3.392 3.5c-1.866 1.925-3.666 3.5-4 3.5-.335 0-2.135-1.575-4-3.5zm.266-11.234L7.467 0 11.2 3.733l3.733 3.734H0l3.733-3.734z' fill='#{hex-color(color.adjust($ui-base-color, $lightness: 12%))}'/></svg>")
-      no-repeat right 8px center / auto 14px;
-  }
 }
 
 .compose-form .compose-form__warning {
@@ -404,35 +533,21 @@ html {
   border-color: transparent transparent $white;
 }
 
+.hero-widget,
+.moved-account-widget,
+.memoriam-widget,
 .activity-stream,
 .nothing-here,
 .directory__tag > a,
 .directory__tag > div,
 .card > a,
 .page-header,
-.compose-form,
-.compose-form__warning {
+.compose-form .compose-form__warning {
   box-shadow: none;
 }
 
-.card {
-  &__img {
-    background: color.adjust($ui-base-color, $lightness: -10%);
-  }
-
-  & > a {
-    &:hover,
-    &:active,
-    &:focus {
-      .card__bar {
-        background: color.adjust($ui-base-color, $lightness: -10%);
-      }
-    }
-  }
-}
-
 .mute-modal select {
-  border: 1px solid var(--background-border-color);
+  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
   background: $simple-background-color
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.933 18.467' height='19.698' width='15.929'><path d='M3.467 14.967l-3.393-3.5H14.86l-3.392 3.5c-1.866 1.925-3.666 3.5-4 3.5-.335 0-2.135-1.575-4-3.5zm.266-11.234L7.467 0 11.2 3.733l3.733 3.734H0l3.733-3.734z' fill='#{hex-color(color.adjust($ui-base-color, $lightness: 8%))}'/></svg>")
     no-repeat right 8px center / auto 16px;
@@ -499,6 +614,13 @@ html {
   }
 }
 
+.status.collapsed .status__content::after {
+  background: linear-gradient(
+    rgba(color.adjust($ui-base-color, $lightness: -13%), 0),
+    rgba(color.adjust($ui-base-color, $lightness: -13%), 1)
+  );
+}
+
 .drawer__inner__mastodon {
   background: $white
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234.80078 31.757813" width="234.80078" height="31.757812"><path d="M19.599609 0c-1.05 0-2.10039.375-2.90039 1.125L0 16.925781v14.832031h234.80078V17.025391l-16.5-15.900391c-1.6-1.5-4.20078-1.5-5.80078 0l-13.80078 13.099609c-1.6 1.5-4.19883 1.5-5.79883 0L179.09961 1.125c-1.6-1.5-4.19883-1.5-5.79883 0L159.5 14.224609c-1.6 1.5-4.20078 1.5-5.80078 0L139.90039 1.125c-1.6-1.5-4.20078-1.5-5.80078 0l-13.79883 13.099609c-1.6 1.5-4.20078 1.5-5.80078 0L100.69922 1.125c-1.600001-1.5-4.198829-1.5-5.798829 0l-13.59961 13.099609c-1.6 1.5-4.200781 1.5-5.800781 0L61.699219 1.125c-1.6-1.5-4.198828-1.5-5.798828 0L42.099609 14.224609c-1.6 1.5-4.198828 1.5-5.798828 0L22.5 1.125C21.7.375 20.649609 0 19.599609 0z" fill="#{hex-color($ui-base-color)}"/></svg>')
@@ -532,11 +654,6 @@ html {
 
 .compose-form .autosuggest-textarea__textarea,
 .compose-form__highlightable,
-.autosuggest-textarea__suggestions,
-.search__input,
-.search__popout,
-.emoji-mart-search input,
-.language-dropdown__dropdown .emoji-mart-search input,
 .poll__option input[type='text'] {
   background: color.adjust($ui-base-color, $lightness: -10%);
 }
@@ -552,69 +669,4 @@ html {
 
 .inline-follow-suggestions__body__scroll-button__icon {
   color: $white;
-}
-
-a.sparkline {
-  &:hover,
-  &:focus,
-  &:active {
-    background: color.adjust($ui-base-color, $lightness: -10%);
-  }
-}
-
-.dashboard__counters {
-  & > div {
-    & > a {
-      &:hover,
-      &:focus,
-      &:active {
-        background: color.adjust($ui-base-color, $lightness: -10%);
-      }
-    }
-  }
-}
-
-.directory {
-  &__tag {
-    & > a {
-      &:hover,
-      &:focus,
-      &:active {
-        background: color.adjust($ui-base-color, $lightness: -10%);
-      }
-    }
-  }
-}
-
-.strike-entry {
-  &:hover,
-  &:focus,
-  &:active {
-    background: color.adjust($ui-base-color, $lightness: -10%);
-  }
-}
-
-.setting-text {
-  background: color.adjust($ui-base-color, $lightness: -10%);
-}
-
-.report-dialog-modal__textarea {
-  background: color.adjust($ui-base-color, $lightness: -10%);
-}
-
-.autosuggest-account {
-  .display-name__account {
-    color: $dark-text-color;
-  }
-}
-
-@supports not selector(::-webkit-scrollbar) {
-  html {
-    scrollbar-color: rgba($action-button-color, 0.25)
-      var(--background-border-color);
-  }
-}
-
-::-webkit-scrollbar-thumb {
-  opacity: 0.25;
 }
