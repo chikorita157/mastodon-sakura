@@ -22,14 +22,9 @@ So here's the deal: we all work on this code, and anyone who uses that does so a
 - And contributing guidelines are available [here](CONTRIBUTING.md) and [here](https://glitch-soc.github.io/docs/contributing/).
 
 # Our Additional Changes
-- Add Mastodon Modern Theme by [Freeplay](https://codeberg.org/Freeplay/Mastodon-Modern) with color variants we have already
+- Sakurajima specific changes (icons, intro text, etc)
 - Footer links and login tweaks
 - Additional themes Added
-- Mastodon-bird-ui theme by [ronilaukkarinen](https://github.com/ronilaukkarinen/mastodon-bird-ui/blob/master/style.css)
-- Reject patterns and Blur Hash filtering from Fedibird, cherrypicked and made compatible for GlitchSoc
-- Reject disabled hashtags.
-- Enable polls with media (cherrypicked from [Chuckya](https://github.com/TheEssem/mastodon) fork)
-- Tennor Gif Picker (cherrypicked from [Chuckya](https://github.com/TheEssem/mastodon) fork)
 
 Mastodon Glitch Edition is a fork of [Mastodon](https://github.com/mastodon/mastodon). Upstream's README file is reproduced below.
 
