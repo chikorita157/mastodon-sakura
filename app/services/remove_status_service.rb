@@ -117,7 +117,7 @@ class RemoveStatusService < BaseService
 
   def remove_from_hashtags
     @account.featured_tags.where(tag_id: @status.tags.map(&:id)).find_each do |featured_tag|
-      featured_tag.decrement(@status.id)
+      featured_tag.decrement(@status)
     end
 
     return unless @status.public_visibility?
@@ -137,6 +137,7 @@ class RemoveStatusService < BaseService
 
     redis.publish('timeline:public', @payload)
     redis.publish(@status.local? ? 'timeline:public:local' : 'timeline:public:remote', @payload)
+    redis.publish('timeline:public:bubble', @payload) if @status.bubble?
   end
 
   def remove_from_media
@@ -146,6 +147,7 @@ class RemoveStatusService < BaseService
 
     redis.publish('timeline:public:media', @payload)
     redis.publish(@status.local? ? 'timeline:public:local:media' : 'timeline:public:remote:media', @payload)
+    redis.publish('timeline:public:bubble:media', @payload) if @status.bubble?
   end
 
   def remove_from_direct

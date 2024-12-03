@@ -40,8 +40,10 @@ namespace :admin do
     end
   end
 
-  get '/settings', to: redirect('/admin/settings/branding')
-  get '/settings/edit', to: redirect('/admin/settings/branding')
+  with_options to: redirect('/admin/settings/branding') do
+    get '/settings'
+    get '/settings/edit'
+  end
 
   namespace :settings do
     resource :branding, only: [:show, :update], controller: 'branding'
@@ -67,6 +69,8 @@ namespace :admin do
       post :disable
     end
   end
+
+  resources :bubble_domains, only: [:index, :new, :create, :destroy]
 
   resources :instances, only: [:index, :show, :destroy], constraints: { id: %r{[^/]+} }, format: 'html' do
     member do

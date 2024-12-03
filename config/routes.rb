@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     /home
     /public
     /public/local
+    /public/bubble
     /public/remote
     /conversations
     /lists/(*any)
@@ -63,6 +64,13 @@ Rails.application.routes.draw do
     controllers authorizations: 'oauth/authorizations',
                 authorized_applications: 'oauth/authorized_applications',
                 tokens: 'oauth/tokens'
+  end
+
+  namespace :oauth do
+    # As this is borrowed from OpenID, the specification says we must also support
+    # POST for the userinfo endpoint:
+    # https://openid.net/specs/openid-connect-core-1_0.html#UserInfo
+    match 'userinfo', via: [:get, :post], to: 'userinfo#show', defaults: { format: 'json' }
   end
 
   scope path: '.well-known' do

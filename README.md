@@ -9,9 +9,11 @@ This is the repo for the fork of Mastodon used by [Sakurajima](https://sakurajim
   - Enlarge emoji in post content on mouse-over/tap
 - Collapsed post improvements
   - show > 1 line for better visual parsing
-  - customize height of posts to trigger lengthy toot collapse, etc)
-- Option to merge boosts and favorites into a single notification for the same status
+  - ~~customize height of posts to trigger lengthy toot collapse, etc)~~ (Implemented upstream!)
+- ~~Option to merge boosts and favorites into a single notification for the same status~~ (Implemented upstream!)
 - Emoji reactions!
+- Quote posts
+- Gif picker
 - Other minor fixes/improvements
 
 So here's the deal: we all work on this code, and anyone who uses that does so absolutely at their own risk. can you dig it?
@@ -104,7 +106,7 @@ Mastodon acts as an OAuth2 provider, so 3rd party apps can use the REST and Stre
 
 - **PostgreSQL** 12+
 - **Redis** 4+
-- **Ruby** 3.1+
+- **Ruby** 3.2+
 - **Node.js** 18+
 
 The repository includes deployment configurations for **Docker and docker-compose** as well as specific platforms like **Heroku**, and **Scalingo**. For Helm charts, reference the [mastodon/chart repository](https://github.com/mastodon/chart). The [**standalone** installation guide](https://docs.joinmastodon.org/admin/install/) is available in the documentation.
