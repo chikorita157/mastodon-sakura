@@ -384,11 +384,6 @@ class StatusContent extends PureComponent {
           <blockquote>
             <bdi>
               <span className='quote-display-name'>
-                <Icon
-                  fixedWidth
-                  aria-hidden='true'
-                  key='icon-quote-right'
-                  icon={QuoteIcon} />
                 <strong className='display-name__html'>
                   <a onClick={this.handleAccountClick} href={quoteStatus.getIn(['account', 'url'])} dangerouslySetInnerHTML={quoteStatusDisplayName} />
                 </strong>
