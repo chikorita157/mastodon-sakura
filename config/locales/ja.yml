@@ -330,6 +330,16 @@ ja:
       unpublish: 非公開にする
       unpublished_msg: お知らせを非掲載にしました
       updated_msg: お知らせを更新しました
+    bubble_domains:
+      add: バブルで追加する
+      created_msg: バブルへのドメインを追加したことは成功しました。
+      delete: 削除する
+      description_html: バブルタイムラインはあなたが選択した他のサーバーからの投稿で構成されるパブリックタイムラインです。　リモートタイムラインやパブリックタイムラインのように騒がしくなく、あなたのサーバーのユーザーが面白いコンテンツや新しい人を発見するのに役立ちます。
+      domain: ドメイン
+      new:
+        save: セーブ
+        title: 新しいバブルのドメインを追加する
+      title: バブル
     critical_update_pending: 重要な更新が保留中です
     custom_emojis:
       assign_category: カテゴリーを割り当て
