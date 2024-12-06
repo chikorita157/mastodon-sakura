@@ -44,7 +44,7 @@
   "keyboard_shortcuts.bookmark": "ブックマーク",
   "keyboard_shortcuts.secondary_toot": "セカンダリートゥートの公開範囲でトゥートする",
   "keyboard_shortcuts.toggle_collapse": "折りたたむ/折りたたみを解除",
-  "limited_account_hint.instance_limit.title": "Tこのプロフィールをあっているサーバーは{domain}のモデレーターによって制限しています。",
+  "limited_account_hint.instance_limit.title": "このプロフィールがあっているサーバーは{domain}のモデレーターによって制限しています。",
   "limited_account_hint.instance_limit.reason": "理由: {reason}",
   "moved_to_warning": "このアカウント{moved_to_link}に引っ越したため、新しいフォロワーを受け入れていません。",
   "navigation_bar.app_settings": "アプリ設定",
