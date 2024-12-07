@@ -5,14 +5,6 @@ html {
   scrollbar-color: $ui-base-color rgba($ui-base-color, 0.25);
 }
 
-:root {
-  --background-color: $ui-base-color;
-}
-
-body {
-  background: $classic-secondary-color !important;
-}
-
 .simple_form .button.button-tertiary {
   color: $highlight-text-color;
 }
@@ -24,7 +16,7 @@ body {
   &:hover,
   &:active,
   &:focus {
-    color: $black;
+	color: $black;
   }
 }
 
@@ -35,19 +27,19 @@ body {
 .error-column,
 .regeneration-indicator {
   background: $ui-base-lighter-color;
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
   border-top: 0;
 }
 
 .column > .scrollable.about {
-  border-top: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border-top: 1px solid #d4a9b2;
 }
 
 .about__meta,
 .about__section__title,
 .interaction-modal {
   background: $white;
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
 }
 
 .rules-list li::before {
@@ -55,26 +47,26 @@ body {
 }
 
 .directory__card__img {
-  background: color.adjust($ui-base-color, $lightness: 12%);
+  background: #c9a1aa;
 }
 
 .filter-form {
   background: $white;
-  border-bottom: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border-bottom: 1px solid #d4a9b2;
 }
 
 .column-back-button,
 .column-header {
   background: $white;
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
 
   @media screen and (max-width: $no-gap-breakpoint) {
-    border-top: 0;
+	border-top: 0;
   }
 
   &--slim-button {
-    top: -50px;
-    right: 0;
+	top: -50px;
+	right: 0;
   }
 }
 
@@ -95,8 +87,8 @@ body {
   &:hover,
   &:active,
   &:focus {
-    color: $ui-highlight-color;
-    background: $white;
+	color: $ui-highlight-color;
+	background: $white;
   }
 }
 
@@ -113,40 +105,40 @@ body {
 .confirmation-modal__cancel-button,
 .mute-modal__cancel-button,
 .block-modal__cancel-button {
-  color: color.adjust($ui-base-color, $lightness: 26%);
+  color: #a6858c;
 
   &:hover,
   &:focus,
   &:active {
-    color: $primary-text-color;
+	color: $primary-text-color;
   }
 }
 
 .column-subheading {
-  background: color.adjust($ui-base-color, $lightness: -4%);
-  border-bottom: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  background: #f2c2cc;
+  border-bottom: 1px solid #d4a9b2;
 }
 
 .getting-started,
 .scrollable {
   .column-link {
-    background: $white;
-    border-bottom: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+	background: $white;
+	border-bottom: 1px solid #d4a9b2;
 
-    &:hover,
-    &:active,
-    &:focus {
-      background: $ui-base-color;
-    }
+	&:hover,
+	&:active,
+	&:focus {
+	  background: $ui-base-color;
+	}
   }
 }
 
 .getting-started .navigation-bar {
-  border-top: 1px solid color.adjust($ui-base-color, $lightness: 8%);
-  border-bottom: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border-top: 1px solid #d4a9b2;
+  border-bottom: 1px solid #d4a9b2;
 
   @media screen and (max-width: $no-gap-breakpoint) {
-    border-top: 0;
+	border-top: 0;
   }
 }
 
@@ -154,7 +146,7 @@ body {
 .setting-text,
 .report-dialog-modal__textarea,
 .audio-player {
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
 }
 
 .report-dialog-modal .dialog-option .poll__input {
@@ -163,8 +155,8 @@ body {
 
 .search__input {
   @media screen and (max-width: $no-gap-breakpoint) {
-    border-top: 0;
-    border-bottom: 0;
+	border-top: 0;
+	border-bottom: 0;
   }
 }
 
@@ -174,20 +166,20 @@ body {
 }
 
 .notification__filter-bar {
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
   border-top: 0;
 }
 
 .drawer__header,
 .drawer__inner {
   background: $white;
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
 }
 
 .drawer__inner__mastodon {
   background: $white
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234.80078 31.757813" width="234.80078" height="31.757812"><path d="M19.599609 0c-1.05 0-2.10039.375-2.90039 1.125L0 16.925781v14.832031h234.80078V17.025391l-16.5-15.900391c-1.6-1.5-4.20078-1.5-5.80078 0l-13.80078 13.099609c-1.6 1.5-4.19883 1.5-5.79883 0L179.09961 1.125c-1.6-1.5-4.19883-1.5-5.79883 0L159.5 14.224609c-1.6 1.5-4.20078 1.5-5.80078 0L139.90039 1.125c-1.6-1.5-4.20078-1.5-5.80078 0l-13.79883 13.099609c-1.6 1.5-4.20078 1.5-5.80078 0L100.69922 1.125c-1.600001-1.5-4.198829-1.5-5.798829 0l-13.59961 13.099609c-1.6 1.5-4.200781 1.5-5.800781 0L61.699219 1.125c-1.6-1.5-4.198828-1.5-5.798828 0L42.099609 14.224609c-1.6 1.5-4.198828 1.5-5.798828 0L22.5 1.125C21.7.375 20.649609 0 19.599609 0z" fill="#{hex-color($ui-base-color)}"/></svg>')
-    no-repeat bottom / 100% auto;
+	url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234.80078 31.757813" width="234.80078" height="31.757812"><path d="M19.599609 0c-1.05 0-2.10039.375-2.90039 1.125L0 16.925781v14.832031h234.80078V17.025391l-16.5-15.900391c-1.6-1.5-4.20078-1.5-5.80078 0l-13.80078 13.099609c-1.6 1.5-4.19883 1.5-5.79883 0L179.09961 1.125c-1.6-1.5-4.19883-1.5-5.79883 0L159.5 14.224609c-1.6 1.5-4.20078 1.5-5.80078 0L139.90039 1.125c-1.6-1.5-4.20078-1.5-5.80078 0l-13.79883 13.099609c-1.6 1.5-4.20078 1.5-5.80078 0L100.69922 1.125c-1.600001-1.5-4.198829-1.5-5.798829 0l-13.59961 13.099609c-1.6 1.5-4.200781 1.5-5.800781 0L61.699219 1.125c-1.6-1.5-4.198828-1.5-5.798828 0L42.099609 14.224609c-1.6 1.5-4.198828 1.5-5.798828 0L22.5 1.125C21.7.375 20.649609 0 19.599609 0z" fill="#{hex-color($ui-base-color)}"/></svg>')
+	no-repeat bottom / 100% auto;
 }
 
 .upload-progress__backdrop {
@@ -196,7 +188,7 @@ body {
 
 // Change the background colors of statuses
 .focusable:focus {
-  background: color.adjust($white, $lightness: 4%);
+  background: #f5f5f5
 }
 
 .detailed-status,
@@ -211,7 +203,7 @@ body {
 
   &:hover,
   &:focus {
-    background: color.adjust($ui-base-color, $lightness: 4%);
+	background: #deb1bb;
   }
 }
 
@@ -243,11 +235,11 @@ body {
 
 .compare-history-modal .report-modal__target,
 .report-dialog-modal .poll__option.dialog-option {
-  border-bottom-color: color.adjust($ui-base-color, $lightness: 4%);
+  border-bottom-color: #deb1bb;
 }
 
 .report-dialog-modal__container {
-  border-top-color: color.adjust($ui-base-color, $lightness: 4%);
+  border-top-color: #deb1bb;
 }
 
 // Change the background colors of modals
@@ -269,7 +261,7 @@ body {
 .picture-in-picture__footer,
 .reactions-bar__item {
   background: $white;
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
 }
 
 .reactions-bar__item:hover,
@@ -281,9 +273,9 @@ body {
 .reactions-bar__item.active {
   background-color: mix($white, $ui-highlight-color, 80%);
   border-color: mix(
-    color.adjust($ui-base-color, $lightness: 8%),
-    $ui-highlight-color,
-    80%
+	#d4a9b2,
+	$ui-highlight-color,
+	80%
   );
 }
 
@@ -306,16 +298,16 @@ body {
 }
 
 .report-modal__comment {
-  border-right-color: color.adjust($ui-base-color, $lightness: 8%);
+  border-right-color: #d4a9b2;
 }
 
 .report-modal__container {
-  border-top-color: color.adjust($ui-base-color, $lightness: 8%);
+  border-top-color: #d4a9b2;
 }
 
 .column-header__collapsible-inner {
-  background: color.adjust($ui-base-color, $lightness: -4%);
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  background: #f2c2cc;
+  border: 1px solid #d4a9b2;
   border-bottom: 0;
 }
 
@@ -339,15 +331,15 @@ body {
 .block-modal__action-bar,
 .onboarding-modal__paginator,
 .error-modal__footer {
-  background: color.adjust($ui-base-color, $lightness: -6%);
+  background: #f7c6d1;
 
   .onboarding-modal__nav,
   .error-modal__nav {
-    &:hover,
-    &:focus,
-    &:active {
-      background-color: color.adjust($ui-base-color, $lightness: -12%);
-    }
+	&:hover,
+	&:focus,
+	&:active {
+	  background-color: #ffccd7;
+	}
   }
 }
 
@@ -357,11 +349,11 @@ body {
 
 .embed-modal .embed-modal__container .embed-modal__html {
   background: $white;
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
 
   &:focus {
-    border-color: color.adjust($ui-base-color, $lightness: 12%);
-    background: $white;
+	border-color: #c9a1aa;
+	background: $white;
   }
 }
 
@@ -370,12 +362,12 @@ body {
 }
 
 .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
-  background: color.adjust($ui-secondary-color, $lightness: -10%);
+  background: #3c4152;
 }
 
 .react-toggle.react-toggle--checked:hover:not(.react-toggle--disabled)
   .react-toggle-track {
-  background: color.adjust($ui-highlight-color, $lightness: 10%);
+  background: #964e55;
 }
 
 // Change the default color used for the text in an empty column or on the error column
@@ -388,7 +380,7 @@ body {
 // Change the default colors used on some parts of the profile pages
 .activity-stream-tabs {
   background: $account-background-color;
-  border-bottom-color: color.adjust($ui-base-color, $lightness: 8%);
+  border-bottom-color: #d4a9b2;
 }
 
 .nothing-here,
@@ -396,12 +388,12 @@ body {
 .directory__tag > a,
 .directory__tag > div {
   background: $white;
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
 
   @media screen and (max-width: $no-gap-breakpoint) {
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-top: 0;
   }
 }
 
@@ -411,9 +403,9 @@ body {
   input[type='email'],
   input[type='password'],
   textarea {
-    &:hover {
-      border-color: color.adjust($ui-base-color, $lightness: 12%);
-    }
+	&:hover {
+	  border-color: #c9a1aa;
+	}
   }
 }
 
@@ -427,19 +419,19 @@ body {
 
 .picture-in-picture-placeholder {
   background: $white;
-  border-color: color.adjust($ui-base-color, $lightness: 8%);
-  color: color.adjust($ui-base-color, $lightness: 8%);
+  border-color: #d4a9b2;
+  color: #d4a9b2;
 }
 
 .directory__tag > a {
   &:hover,
   &:active,
   &:focus {
-    background: $ui-base-color;
+	background: $ui-base-color;
   }
 
   @media screen and (max-width: $no-gap-breakpoint) {
-    border: 0;
+	border: 0;
   }
 }
 
@@ -447,80 +439,76 @@ body {
   &__toolbar,
   &__row,
   .nothing-here {
-    border-color: color.adjust($ui-base-color, $lightness: 8%);
+	border-color: #d4a9b2;
   }
 }
 
 .activity-stream {
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
 
   &--under-tabs {
-    border-top: 0;
+	border-top: 0;
   }
 
   .entry {
-    background: $account-background-color;
+	background: $account-background-color;
 
-    .detailed-status.light,
-    .more.light,
-    .status.light {
-      border-bottom-color: color.adjust($ui-base-color, $lightness: 8%);
-    }
+	.detailed-status.light,
+	.more.light,
+	.status.light {
+	  border-bottom-color: #d4a9b2;
+	}
   }
 
   .status.light {
-    .status__content {
-      color: $primary-text-color;
-    }
+	.status__content {
+	  color: $primary-text-color;
+	}
 
-    .display-name {
-      strong {
-        color: $primary-text-color;
-      }
-    }
+	.display-name {
+	  strong {
+		color: $primary-text-color;
+	  }
+	}
   }
 }
 
 .accounts-grid {
   .account-grid-card {
-    .controls {
-      .icon-button {
-        color: $darker-text-color;
-      }
-    }
+	.controls {
+	  .icon-button {
+		color: $darker-text-color;
+	  }
+	}
 
-    .name {
-      a {
-        color: $primary-text-color;
-      }
-    }
+	.name {
+	  a {
+		color: $primary-text-color;
+	  }
+	}
 
-    .username {
-      color: $darker-text-color;
-    }
+	.username {
+	  color: $darker-text-color;
+	}
 
-    .account__header__content {
-      color: $primary-text-color;
-    }
+	.account__header__content {
+	  color: $primary-text-color;
+	}
   }
 }
 
 .simple_form {
   .warning {
-    box-shadow: none;
-    background: rgba($error-red, 0.5);
-    text-shadow: none;
+	box-shadow: none;
+	background: rgba($error-red, 0.5);
+	text-shadow: none;
   }
 
   .recommended {
-    border-color: $ui-highlight-color;
-    color: $ui-highlight-color;
-    background-color: rgba($ui-highlight-color, 0.1);
+	border-color: $ui-highlight-color;
+	color: $ui-highlight-color;
+	background-color: rgba($ui-highlight-color, 0.1);
   }
-}
-
-.compose-form .autosuggest-textarea__textarea, .compose-form__highlightable, .poll__option input[type=text] {
-  background-color: $ui-highlight-color !important;
 }
 
 .compose-form .compose-form__warning {
@@ -529,14 +517,14 @@ body {
 
   &,
   a {
-    color: $ui-highlight-color;
+	color: $ui-highlight-color;
   }
 }
 
 .status__content,
 .reply-indicator__content {
   a {
-    color: $highlight-text-color;
+	color: $highlight-text-color;
   }
 }
 
@@ -544,7 +532,7 @@ body {
   color: $white;
 
   svg {
-    fill: $white;
+	fill: $white;
   }
 }
 
@@ -572,10 +560,10 @@ body {
 }
 
 .mute-modal select {
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
   background: $simple-background-color
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.933 18.467' height='19.698' width='15.929'><path d='M3.467 14.967l-3.393-3.5H14.86l-3.392 3.5c-1.866 1.925-3.666 3.5-4 3.5-.335 0-2.135-1.575-4-3.5zm.266-11.234L7.467 0 11.2 3.733l3.733 3.734H0l3.733-3.734z' fill='#{hex-color(color.adjust($ui-base-color, $lightness: 8%))}'/></svg>")
-    no-repeat right 8px center / auto 16px;
+	url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.933 18.467' height='19.698' width='15.929'><path d='M3.467 14.967l-3.393-3.5H14.86l-3.392 3.5c-1.866 1.925-3.666 3.5-4 3.5-.335 0-2.135-1.575-4-3.5zm.266-11.234L7.467 0 11.2 3.733l3.733 3.734H0l3.733-3.734z' fill='#{hex-color(#d4a9b2)}'/></svg>")
+	no-repeat right 8px center / auto 16px;
 }
 
 // Glitch-soc-specific changes
@@ -584,75 +572,75 @@ body {
   background: $ui-secondary-color;
 
   &:not([disabled]) {
-    &:hover,
-    &:focus {
-      background: color.adjust($ui-secondary-color, $lightness: -10%);
-    }
+	&:hover,
+	&:focus {
+	  background: #3c4152;
+	}
 
-    &.active {
-      background-color: color.adjust($ui-highlight-color, $lightness: -2%);
+	&.active {
+	  background-color: #b55e67;
 
-      &:hover,
-      &:focus {
-        background: color.adjust($ui-highlight-color, $lightness: 10%);
-      }
-    }
+	  &:hover,
+	  &:focus {
+		background: #964e55;
+	  }
+	}
   }
 }
 
 .glitch.local-settings {
   background: $ui-base-color;
-  border: 1px solid color.adjust($ui-base-color, $lightness: 8%);
+  border: 1px solid #d4a9b2;
 }
 
 .glitch.local-settings__navigation {
-  background: color.adjust($ui-base-color, $lightness: -8%);
+  background: c#fccad5;
 }
 
 .glitch.local-settings__navigation__item {
-  background: color.adjust($ui-base-color, $lightness: -8%);
-  border-bottom: 1px color.adjust($ui-base-color, $lightness: 8%) solid;
+  background: c#fccad5;
+  border-bottom: 1px #d4a9b2 solid;
 
   &:hover {
-    background: $ui-base-color;
+	background: $ui-base-color;
   }
 
   &.active {
-    background: $ui-highlight-color;
-    color: $white;
+	background: $ui-highlight-color;
+	color: $white;
   }
 
   &.close,
   &.close:hover {
-    background: $error-value-color;
-    color: $primary-text-color;
+	background: $error-value-color;
+	color: $primary-text-color;
   }
 }
 
 .notification__dismiss-overlay {
   .wrappy {
-    box-shadow: unset;
+	box-shadow: unset;
 
-    .ckbox {
-      text-shadow: unset;
-    }
+	.ckbox {
+	  text-shadow: unset;
+	}
   }
 }
 
 .status.collapsed .status__content::after {
   background: linear-gradient(
-    rgba(color.adjust($ui-base-color, $lightness: -13%), 0),
-    rgba(color.adjust($ui-base-color, $lightness: -13%), 1)
+	rgba(#ffccd7, 0),
+	rgba(#ffccd7, 1)
   );
 }
 
 .drawer__inner__mastodon {
   background: $white
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234.80078 31.757813" width="234.80078" height="31.757812"><path d="M19.599609 0c-1.05 0-2.10039.375-2.90039 1.125L0 16.925781v14.832031h234.80078V17.025391l-16.5-15.900391c-1.6-1.5-4.20078-1.5-5.80078 0l-13.80078 13.099609c-1.6 1.5-4.19883 1.5-5.79883 0L179.09961 1.125c-1.6-1.5-4.19883-1.5-5.79883 0L159.5 14.224609c-1.6 1.5-4.20078 1.5-5.80078 0L139.90039 1.125c-1.6-1.5-4.20078-1.5-5.80078 0l-13.79883 13.099609c-1.6 1.5-4.20078 1.5-5.80078 0L100.69922 1.125c-1.600001-1.5-4.198829-1.5-5.798829 0l-13.59961 13.099609c-1.6 1.5-4.200781 1.5-5.800781 0L61.699219 1.125c-1.6-1.5-4.198828-1.5-5.798828 0L42.099609 14.224609c-1.6 1.5-4.198828 1.5-5.798828 0L22.5 1.125C21.7.375 20.649609 0 19.599609 0z" fill="#{hex-color($ui-base-color)}"/></svg>')
-    no-repeat bottom / 100% auto !important;
+	url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234.80078 31.757813" width="234.80078" height="31.757812"><path d="M19.599609 0c-1.05 0-2.10039.375-2.90039 1.125L0 16.925781v14.832031h234.80078V17.025391l-16.5-15.900391c-1.6-1.5-4.20078-1.5-5.80078 0l-13.80078 13.099609c-1.6 1.5-4.19883 1.5-5.79883 0L179.09961 1.125c-1.6-1.5-4.19883-1.5-5.79883 0L159.5 14.224609c-1.6 1.5-4.20078 1.5-5.80078 0L139.90039 1.125c-1.6-1.5-4.20078-1.5-5.80078 0l-13.79883 13.099609c-1.6 1.5-4.20078 1.5-5.80078 0L100.69922 1.125c-1.600001-1.5-4.198829-1.5-5.798829 0l-13.59961 13.099609c-1.6 1.5-4.200781 1.5-5.800781 0L61.699219 1.125c-1.6-1.5-4.198828-1.5-5.798828 0L42.099609 14.224609c-1.6 1.5-4.198828 1.5-5.798828 0L22.5 1.125C21.7.375 20.649609 0 19.599609 0z" fill="#{hex-color($ui-base-color)}"/></svg>')
+	no-repeat bottom / 100% auto !important;
 
   .mastodon {
-    filter: contrast(75%) brightness(75%) !important;
+	filter: contrast(75%) brightness(75%) !important;
   }
 }
 
@@ -674,13 +662,13 @@ body {
 }
 
 .compose-form .spoiler-input__input {
-  color: color.adjust($ui-highlight-color, $lightness: 8%);
+  color: #9c5158;
 }
 
 .compose-form .autosuggest-textarea__textarea,
 .compose-form__highlightable,
 .poll__option input[type='text'] {
-  background: color.adjust($ui-base-color, $lightness: -10%);
+  background: #c96972;
 }
 
 .inline-follow-suggestions {
