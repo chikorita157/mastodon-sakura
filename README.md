@@ -14,6 +14,7 @@ This is the repo for the fork of Mastodon used by [Sakurajima](https://sakurajim
 - Emoji reactions!
 - Quote posts
 - Gif picker
+^ Bubble Timeline
 - Other minor fixes/improvements
 
 So here's the deal: we all work on this code, and anyone who uses that does so absolutely at their own risk. can you dig it?
@@ -30,6 +31,9 @@ So here's the deal: we all work on this code, and anyone who uses that does so a
 - Reject disabled hashtags.
 - Enable polls with media (cherrypicked from [Chuckya](https://github.com/TheEssem/mastodon) fork)
 - Tennor Gif Picker (cherrypicked from [Chuckya](https://github.com/TheEssem/mastodon) fork)
+- Bubble Timeline [Chuckya](https://github.com/TheEssem/mastodon) fork)
+- Profile showing server Limit reasons if profile is on a server that is limitedd [Chuckya](https://github.com/TheEssem/mastodon) fork)
+- Configurable upload limits [Chuckya](https://github.com/TheEssem/mastodon) fork)
 
 Mastodon Glitch Edition is a fork of [Mastodon](https://github.com/mastodon/mastodon). Upstream's README file is reproduced below.
 
