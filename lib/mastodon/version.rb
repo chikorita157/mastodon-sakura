@@ -17,7 +17,7 @@ module Mastodon
     end
 
     def default_prerelease
-      'alpha.3-f1'
+      'alpha.3'
     end
 
     def prerelease
