@@ -218,6 +218,9 @@ export function directCompose(account) {
   };
 }
 
+/**
+ * @param {null | string} overridePrivacy
+ */
 export function submitCompose(overridePrivacy = null) {
   return function (dispatch, getState) {
     let status     = getState().getIn(['compose', 'text'], '');
@@ -478,7 +481,7 @@ export function initMediaEditModal(id) {
 
     dispatch(openModal({
       modalType: 'FOCAL_POINT',
-      modalProps: { id },
+      modalProps: { mediaId: id },
     }));
   };
 }

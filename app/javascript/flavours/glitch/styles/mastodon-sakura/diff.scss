@@ -627,7 +627,7 @@ html {
   }
 }
 
-.status.collapsed .status__content::after {
+.status__content .status__content.status__content--collapsed::after {
   background: linear-gradient(
 	rgba(#ffccd7, 0),
 	rgba(#ffccd7, 1)

@@ -41,6 +41,7 @@ class Status < ApplicationRecord
   include Status::SearchConcern
   include Status::SnapshotConcern
   include Status::ThreadingConcern
+  include Status::Visibility
 
   MEDIA_ATTACHMENTS_LIMIT = (ENV['MAX_MEDIA_ATTACHMENTS'] || 4).to_i
   REMOTE_MEDIA_ATTACHMENTS_LIMIT = (ENV['MAX_REMOTE_MEDIA_ATTACHMENTS'] || 16).to_i
@@ -55,8 +56,6 @@ class Status < ApplicationRecord
 
   update_index('statuses', :proper)
   update_index('public_statuses', :proper)
-
-  enum :visibility, { public: 0, unlisted: 1, private: 2, direct: 3, limited: 4 }, suffix: :visibility, validate: true
 
   belongs_to :application, class_name: 'Doorkeeper::Application', optional: true
 
@@ -105,7 +104,6 @@ class Status < ApplicationRecord
   validates_with StatusLengthValidator
   validates_with DisallowedHashtagsValidator
   validates :reblog, uniqueness: { scope: :account }, if: :reblog?
-  validates :visibility, exclusion: { in: %w(direct limited) }, if: :reblog?
   validates :content_type, inclusion: { in: %w(text/plain text/markdown text/html) }, allow_nil: true
   validates :quote_visibility, inclusion: { in: %w(public unlisted) }, if: :quote?
 
@@ -134,9 +132,6 @@ class Status < ApplicationRecord
   scope :tagged_with_none, lambda { |tag_ids|
     where('NOT EXISTS (SELECT * FROM statuses_tags forbidden WHERE forbidden.status_id = statuses.id AND forbidden.tag_id IN (?))', tag_ids)
   }
-  scope :distributable_visibility, -> { where(visibility: %i(public unlisted)) }
-  scope :list_eligible_visibility, -> { where(visibility: %i(public unlisted private)) }
-  scope :not_direct_visibility, -> { where.not(visibility: :direct) }
 
   scope :not_local_only, -> { where(local_only: [false, nil]) }
 
@@ -153,7 +148,6 @@ class Status < ApplicationRecord
 
   before_validation :prepare_contents, if: :local?
   before_validation :set_reblog
-  before_validation :set_visibility
   before_validation :set_conversation
   before_validation :set_local
 
@@ -280,16 +274,6 @@ class Status < ApplicationRecord
     PreviewCardsStatus.where(status_id: id).delete_all
   end
 
-  def hidden?
-    !distributable?
-  end
-
-  def distributable?
-    public_visibility? || unlisted_visibility?
-  end
-
-  alias sign? distributable?
-
   def with_media?
     ordered_media_attachments.any?
   end
@@ -322,7 +306,7 @@ class Status < ApplicationRecord
   def reactions(account_id = nil)
     grouped_ordered_status_reactions.select(
       [:name, :custom_emoji_id, 'COUNT(*) as count'].tap do |values|
-        values << value_for_reaction_me_column(account_id)
+        values << StatusReaction.value_for_reaction_me_column(account_id)
       end
     ).to_a.tap do |records|
       ActiveRecord::Associations::Preloader.new(records: records, associations: :custom_emoji).call
@@ -354,6 +338,10 @@ class Status < ApplicationRecord
 
   def favourites_count
     status_stat&.favourites_count || 0
+  end
+
+  def reactions_count
+    status_stat&.reactions_count || 0
   end
 
   # Reblogs count received from an external instance
@@ -403,10 +391,6 @@ class Status < ApplicationRecord
   end
 
   class << self
-    def selectable_visibilities
-      visibilities.keys - %w(direct limited)
-    end
-
     def as_direct_timeline(account, limit = 20, max_id = nil, since_id = nil)
       # direct timeline is mix of direct message from_me and to_me.
       # 2 queries are executed with pagination.
@@ -518,27 +502,6 @@ class Status < ApplicationRecord
       )
   end
 
-  def value_for_reaction_me_column(account_id)
-    if account_id.nil?
-      'FALSE AS me'
-    else
-      <<~SQL.squish
-        EXISTS(
-          SELECT 1
-          FROM status_reactions inner_reactions
-          WHERE inner_reactions.account_id = #{account_id}
-            AND inner_reactions.status_id = status_reactions.status_id
-            AND inner_reactions.name = status_reactions.name
-            AND (
-              inner_reactions.custom_emoji_id = status_reactions.custom_emoji_id
-              OR inner_reactions.custom_emoji_id IS NULL
-                AND status_reactions.custom_emoji_id IS NULL
-            )
-        ) AS me
-      SQL
-    end
-  end
-
   def update_status_stat!(attrs)
     return if marked_for_destruction? || destroyed?
 
@@ -560,11 +523,6 @@ class Status < ApplicationRecord
 
   def set_poll_id
     update_column(:poll_id, poll.id) if association(:poll).loaded? && poll.present?
-  end
-
-  def set_visibility
-    self.visibility = reblog.visibility if reblog? && visibility.nil?
-    self.visibility = (account.locked? ? :private : :public) if visibility.nil?
   end
 
   def set_local_only

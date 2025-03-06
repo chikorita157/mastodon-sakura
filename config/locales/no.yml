@@ -773,6 +773,7 @@
       batch:
         remove_from_report: Fjern fra rapport
         report: Rapport
+      contents: Innhold
       deleted: Slettet
       favourites: Favoritter
       history: Versjonshistorikk
@@ -841,8 +842,25 @@
         action: Sjekk her for mer informasjon
         message_html: "<strong>Objektlagringen din er feilkonfigurert. Personvernet til brukerne dine er i fare.</strong>"
     tags:
+      moderation:
+        pending_review: Avventer gjennomgang
+        reviewed: Gjennomgått
+        title: Status
+      name: Navn
+      newest: Nyeste
+      oldest: Eldst
+      reset: Tilbakestill
       review: Gjennomgangsstatus
+      search: Søk
+      title: Emneknagger
       updated_msg: Emneknagg innstillinger vellykket oppdatert
+    terms_of_service:
+      changelog: Hva har blitt endret
+      current: Nåværende
+      draft: Kladd
+      history: Historikk
+      publish: Publiser
+      title: Bruksvilkår
     title: Administrasjon
     trends:
       allow: Tillat
@@ -1033,8 +1051,8 @@
     migrate_account: Flytt til en annen konto
     migrate_account_html: Hvis du ønsker å henvise denne kontoen til en annen, kan du <a href="%{path}">konfigurere det her</a>.
     or_log_in_with: Eller logg inn med
-    privacy_policy_agreement_html: Jeg har lest og godtar <a href="%{privacy_policy_path}" target="_blank">retningslinjer for personvern</a>
     progress:
+      confirm: Bekreft E-postadressen
       details: Dine opplysninger
       review: Vår gjennomgang
       rules: Godta regler
@@ -1056,7 +1074,6 @@
     security: Sikkerhet
     set_new_password: Angi nytt passord
     setup:
-      email_settings_hint_html: Klikk på lenken vi sendte deg for å bekrefte %{email}. Vi venter her.
       link_not_received: Fikk du ikke lenken?
       title: Sjekk innboksen din
     sign_in:
@@ -1064,7 +1081,6 @@
       title: Logg inn på %{domain}
     sign_up:
       manual_review: Registreringer på %{domain} krever manuell gjennomgang av moderatorene våre. For å hjelpe oss med å behandle registreringen din, skriv litt om deg selv og hvorfor du vil ha en konto på %{domain}.
-      preamble: Med en konto på denne Mastodon-tjeneren vil du kunne følge andre personer på nettverket, uansett hvor kontoen deres holder til.
       title: La oss få deg satt i gang på %{domain}.
     status:
       account_status: Kontostatus
@@ -1509,7 +1525,6 @@
   scheduled_statuses:
     over_daily_limit: Du har overskredet grensen på %{limit} planlagte innlegg for i dag
     over_total_limit: Du har overskredet grensen på %{limit} planlagte innlegg
-    too_soon: Den planlagte datoen må være i fremtiden
   self_destruct:
     lead_html: Dessverre stenger <strong>%{domain}</strong> for alltid. Hvis du hadde en konto der vil du ikke kunne fortsette å bruke den, men du kan fremdeles be om en sikkerhetskopi av dataene dine.
     title: Denne serveren stenger
@@ -1573,6 +1588,7 @@
     import: Importér
     import_and_export: Importer og eksporter
     migrate: Kontomigrering
+    notifications: E-postbeskjeder
     preferences: Innstillinger
     profile: Profil
     relationships: Følginger og følgere
@@ -1580,6 +1596,8 @@
     strikes: Modereringsadvarsler
     two_factor_authentication: Tofaktorautentisering
     webauthn_authentication: Sikkerhetsnøkler
+  severed_relationships:
+    type: Hendelse
   statuses:
     attached:
       audio:
@@ -1658,6 +1676,8 @@
       too_late: Det er for sent å anke denne advarselen
   tags:
     does_not_match_previous_name: samsvarer ikke med det forrige navnet
+  terms_of_service:
+    title: Bruksvilkår
   themes:
     contrast: Mastodon (Høykontrast)
     default: Mastodon
@@ -1766,6 +1786,7 @@
       follows_view_more: Vis flere personer å følge
       hashtags_title: Populære emneknagger
       hashtags_view_more: Vis flere populære emneknagger
+      post_action: Sett sammen
       post_step: Si hallo til verdenen med tekst, bilder, videoer, eller meningsmålinger.
       post_title: Lag ditt første innlegg
       share_action: Del

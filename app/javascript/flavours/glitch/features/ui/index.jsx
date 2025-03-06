@@ -14,7 +14,7 @@ import { HotKeys } from 'react-hotkeys';
 
 import { focusApp, unfocusApp, changeLayout } from 'flavours/glitch/actions/app';
 import { synchronouslySubmitMarkers, submitMarkers, fetchMarkers } from 'flavours/glitch/actions/markers';
-import { initializeNotifications } from 'flavours/glitch/actions/notifications_migration';
+import { fetchNotifications } from 'flavours/glitch/actions/notification_groups';
 import { INTRODUCTION_VERSION } from 'flavours/glitch/actions/onboarding';
 import { HoverCardController } from 'flavours/glitch/components/hover_card_controller';
 import { Permalink } from 'flavours/glitch/components/permalink';
@@ -26,7 +26,6 @@ import { WithRouterPropTypes } from 'flavours/glitch/utils/react_router';
 
 import { uploadCompose, resetCompose, changeComposeSpoilerness } from '../../actions/compose';
 import { clearHeight } from '../../actions/height_cache';
-import { notificationsSetVisibility } from '../../actions/notifications';
 import { fetchServer, fetchServerTranslationLanguages } from '../../actions/server';
 import { expandHomeTimeline } from '../../actions/timelines';
 import initialState, { me, owner, singleUserMode, trendsEnabled, trendsAsLanding, disableHoverCards } from '../../initial_state';
@@ -49,6 +48,7 @@ import {
   HomeTimeline,
   Followers,
   Following,
+  Reactions,
   Reblogs,
   Favourites,
   DirectTimeline,
@@ -74,8 +74,10 @@ import {
   OnboardingProfile,
   OnboardingFollows,
   Explore,
+  Search,
   About,
   PrivacyPolicy,
+  TermsOfService,
 } from './util/async-components';
 import { ColumnsContextProvider } from './util/columns_context';
 import { WrappedSwitch, WrappedRoute } from './util/react_router_helpers';
@@ -99,6 +101,7 @@ const mapStateToProps = state => ({
   hicolorPrivacyIcons: state.getIn(['local_settings', 'hicolor_privacy_icons']),
   moved: state.getIn(['accounts', me, 'moved']) && state.getIn(['accounts', state.getIn(['accounts', me, 'moved'])]),
   firstLaunch: state.getIn(['settings', 'introductionVersion'], 0) < INTRODUCTION_VERSION,
+  newAccount: !state.getIn(['accounts', me, 'note']) && !state.getIn(['accounts', me, 'bot']) && state.getIn(['accounts', me, 'following_count'], 0) === 0 && state.getIn(['accounts', me, 'statuses_count'], 0) === 0,
   username: state.getIn(['accounts', me, 'username']),
 });
 
@@ -132,9 +135,9 @@ const keyMap = {
   goToRequests: 'g r',
   toggleHidden: 'x',
   bookmark: 'd',
-  toggleCollapse: 'shift+x',
   toggleSensitive: 'h',
   openMedia: 'e',
+  onTranslate: 't',
 };
 
 class SwitchingColumnsArea extends PureComponent {
@@ -143,6 +146,7 @@ class SwitchingColumnsArea extends PureComponent {
     children: PropTypes.node,
     location: PropTypes.object,
     singleColumn: PropTypes.bool,
+    forceOnboarding: PropTypes.bool,
   };
 
   UNSAFE_componentWillMount () {
@@ -173,14 +177,16 @@ class SwitchingColumnsArea extends PureComponent {
   };
 
   render () {
-    const { children, singleColumn } = this.props;
+    const { children, singleColumn, forceOnboarding } = this.props;
     const { signedIn } = this.props.identity;
     const pathName = this.props.location.pathname;
 
     let redirect;
 
     if (signedIn) {
-      if (singleColumn) {
+      if (forceOnboarding) {
+        redirect = <Redirect from='/' to='/start' exact />;
+      } else if (singleColumn) {
         redirect = <Redirect from='/' to='/home' exact />;
       } else {
         redirect = <Redirect from='/' to='/deck/getting-started' exact />;
@@ -209,6 +215,7 @@ class SwitchingColumnsArea extends PureComponent {
             <WrappedRoute path='/keyboard-shortcuts' component={KeyboardShortcuts} content={children} />
             <WrappedRoute path='/about' component={About} content={children} />
             <WrappedRoute path='/privacy-policy' component={PrivacyPolicy} content={children} />
+            <WrappedRoute path='/terms-of-service' component={TermsOfService} content={children} />
 
             <WrappedRoute path={['/home', '/timelines/home']} component={HomeTimeline} content={children} />
             <Redirect from='/timelines/public' to='/public' exact />
@@ -235,7 +242,8 @@ class SwitchingColumnsArea extends PureComponent {
             <WrappedRoute path={['/start', '/start/profile']} exact component={OnboardingProfile} content={children} />
             <WrappedRoute path='/start/follows' component={OnboardingFollows} content={children} />
             <WrappedRoute path='/directory' component={Directory} content={children} />
-            <WrappedRoute path={['/explore', '/search']} component={Explore} content={children} />
+            <WrappedRoute path='/explore' component={Explore} content={children} />
+            <WrappedRoute path='/search' component={Search} content={children} />
             <WrappedRoute path={['/publish', '/statuses/new']} component={Compose} content={children} />
 
             <WrappedRoute path={['/@:acct', '/accounts/:id']} exact component={AccountTimeline} content={children} />
@@ -245,6 +253,7 @@ class SwitchingColumnsArea extends PureComponent {
             <WrappedRoute path={['/accounts/:id/following', '/users/:acct/following', '/@:acct/following']} component={Following} content={children} />
             <WrappedRoute path={['/@:acct/media', '/accounts/:id/media']} component={AccountGallery} content={children} />
             <WrappedRoute path='/@:acct/:statusId' exact component={Status} content={children} />
+            <WrappedRoute path='/@:acct/:statusId/reactions' component={Reactions} content={children} />
             <WrappedRoute path='/@:acct/:statusId/reblogs' component={Reblogs} content={children} />
             <WrappedRoute path='/@:acct/:statusId/favourites' component={Favourites} content={children} />
 
@@ -290,6 +299,7 @@ class UI extends PureComponent {
     moved: PropTypes.map,
     layout: PropTypes.string.isRequired,
     firstLaunch: PropTypes.bool,
+    newAccount: PropTypes.bool,
     username: PropTypes.string,
     ...WithRouterPropTypes,
   };
@@ -313,7 +323,6 @@ class UI extends PureComponent {
 
   handleVisibilityChange = () => {
     const visibility = !document[this.visibilityHiddenProp];
-    this.props.dispatch(notificationsSetVisibility(visibility));
     if (visibility) {
       this.props.dispatch(focusApp());
       this.props.dispatch(submitMarkers({ immediate: true }));
@@ -433,7 +442,7 @@ class UI extends PureComponent {
     if (signedIn) {
       this.props.dispatch(fetchMarkers());
       this.props.dispatch(expandHomeTimeline());
-      this.props.dispatch(initializeNotifications());
+      this.props.dispatch(fetchNotifications());
       this.props.dispatch(fetchServerTranslationLanguages());
 
       setTimeout(() => this.props.dispatch(fetchServer()), 3000);
@@ -614,7 +623,7 @@ class UI extends PureComponent {
 
   render () {
     const { draggingOver } = this.state;
-    const { children, isWide, location, layout, moved } = this.props;
+    const { children, isWide, location, layout, moved, firstLaunch, newAccount } = this.props;
 
     const className = classNames('ui', {
       'wide': isWide,
@@ -661,7 +670,7 @@ class UI extends PureComponent {
 
           <Header />
 
-          <SwitchingColumnsArea identity={this.props.identity} location={location} singleColumn={layout === 'mobile' || layout === 'single-column'}>
+          <SwitchingColumnsArea identity={this.props.identity} location={location} singleColumn={layout === 'mobile' || layout === 'single-column'} forceOnboarding={firstLaunch && newAccount}>
             {children}
           </SwitchingColumnsArea>
 
