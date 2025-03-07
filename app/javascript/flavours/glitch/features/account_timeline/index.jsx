@@ -73,6 +73,7 @@ class AccountTimeline extends ImmutablePureComponent {
     isAccount: PropTypes.bool,
     suspended: PropTypes.bool,
     hidden: PropTypes.bool,
+    instanceHideReason: PropTypes.string,
     multiColumn: PropTypes.bool,
   };
 
