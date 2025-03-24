@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_05_023754) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_05_074104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -258,6 +258,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_05_023754) do
     t.datetime "updated_at", precision: nil, null: false
     t.datetime "published_at", precision: nil
     t.bigint "status_ids", array: true
+    t.datetime "notification_sent_at"
   end
 
   create_table "annual_report_statuses_per_account_counts", force: :cascade do |t|
@@ -1075,6 +1076,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_05_023754) do
     t.datetime "edited_at", precision: nil
     t.boolean "trendable"
     t.bigint "ordered_media_attachment_ids", array: true
+    t.datetime "fetched_replies_at"
     t.bigint "quote_id"
     t.index ["account_id", "id", "visibility", "updated_at"], name: "index_statuses_20190820", order: { id: :desc }, where: "(deleted_at IS NULL)"
     t.index ["account_id"], name: "index_statuses_on_account_id"
@@ -1135,6 +1137,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_05_023754) do
     t.datetime "notification_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "effective_date"
+    t.index ["effective_date"], name: "index_terms_of_services_on_effective_date", unique: true, where: "(effective_date IS NOT NULL)"
   end
 
   create_table "tombstones", force: :cascade do |t|
