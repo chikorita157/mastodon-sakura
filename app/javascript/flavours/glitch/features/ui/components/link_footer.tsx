@@ -19,15 +19,25 @@ export const LinkFooter: React.FC<{
   return (
     <div className='link-footer'>
       <p>
-        New to Mastodon and want an easier transition? Try the{' '}
-        <a href='https://elk.urusai.social/'>Alternative UI (Elk)</a> for a more
-        &quot;bird-like&quot; interface!
-      </p>
+        <strong>Sakurajima is a donor sponsored instance.</strong> You can support us at:
+        {' '}
+         <a key='paypal' href='https://www.paypal.com/donate/?hosted_button_id=HREN4ATRLZ54S'>Paypal</a>
+        {' · '}
+        <a key='kofi' href='https://ko-fi.com/V7V8GAJR9'>Ko-Fi</a>
+        {' · '}
+        <a key='patreon' href='https://www.patreon.com/sakurajimamastodon'>Patreon</a>
+        </p>
       <p>
         <strong>{domain}</strong>:{' '}
         <Link to='/about' target={multiColumn ? '_blank' : undefined}>
           <FormattedMessage id='footer.about' defaultMessage='About' />
         </Link>
+        {' · '}
+        <a key='misskey' href='https://sakurajima.social'>Misskey</a>
+        {' · '}
+        <a key='forums' href='https://forums.sakurajima.moe'>Forums</a>
+        {' · '}
+        <a key='blog' href='https://blog.sakurajima.moe'>Blog</a>
         {statusPageUrl && (
           <>
             <DividingCircle />
