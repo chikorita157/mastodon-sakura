@@ -34,7 +34,8 @@ So here's the deal: we all work on this code, and anyone who uses that does so a
 - Bubble Timeline [Chuckya](https://github.com/TheEssem/mastodon) fork)
 - Profile showing server Limit reasons if profile is on a server that is limitedd [Chuckya](https://github.com/TheEssem/mastodon) fork)
 - Configurable upload limits [Chuckya](https://github.com/TheEssem/mastodon) fork)
-
+- Fluent Emojis replace Twemoji (which is no longer maintained)
+  
 Mastodon Glitch Edition is a fork of [Mastodon](https://github.com/mastodon/mastodon). Upstream's README file is reproduced below.
 
 ---
