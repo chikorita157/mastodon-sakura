@@ -9,7 +9,6 @@ import { me, reduceMotion } from 'flavours/glitch/initial_state';
 import ready from 'flavours/glitch/ready';
 import { store } from 'flavours/glitch/store';
 
-import { initializeEmoji } from './features/emoji';
 import { isProduction, isDevelopment } from './utils/environment';
 
 function main() {
@@ -30,6 +29,7 @@ function main() {
       });
     }
 
+    const { initializeEmoji } = await import('./features/emoji/index');
     initializeEmoji();
 
     const root = createRoot(mountNode);
