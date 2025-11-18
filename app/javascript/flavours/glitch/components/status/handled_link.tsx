@@ -144,7 +144,7 @@ export const HandledLink: FC<HandledLinkProps & ComponentProps<'a'>> = ({
     return (
       <Link
         className={classNames('mention hashtag', className)}
-        to={`/tags/${hashtag}`}
+        to={`/tags/${encodeURIComponent(hashtag)}`}
         rel='tag'
         data-menu-hashtag={hashtagAccountId}
       >
@@ -194,7 +194,7 @@ export const HandledLink: FC<HandledLinkProps & ComponentProps<'a'>> = ({
   return (
     <a
       {...props}
-      href={encodeURI(href)}
+      href={href}
       title={href}
       className={classNames('unhandled-link', className)}
       target='_blank'
