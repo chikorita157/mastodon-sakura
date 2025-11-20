@@ -9,15 +9,15 @@ module Mastodon
     end
 
     def minor
-      6
+      5
     end
 
     def patch
-      0
+      2
     end
 
     def default_prerelease
-      'alpha.1'
+      ''
     end
 
     def prerelease
