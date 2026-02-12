@@ -1,0 +1,65 @@
+variables:
+  environment: &docker-environment
+    SERVER_IMAGE: gitea.treehouse.systems/treehouse/mastodon
+    STREAMING_IMAGE: gitea.treehouse.systems/treehouse/mastodon-streaming
+    DATE_COMMAND: export COMMIT_DATE=$(date -u -Idate -d @$(git show -s --format=%ct))
+  docker-step: &docker-step
+    image: docker:rc-git
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      <<: *docker-environment
+
+clone:
+  git:
+    image: woodpeckerci/plugin-git
+    settings:
+      partial: true
+      lfs: false
+
+steps:
+  output:
+    <<: *docker-step
+    when:
+      - event: [push, tag, manual]
+    commands:
+      - eval $DATE_COMMAND
+      - export TAG=$${COMMIT_DATE}.$CI_COMMIT_SHA && echo $${TAG}
+      - docker image build -f Dockerfile --build-arg SOURCE_TAG=$CI_COMMIT_SHA --build-arg SOURCE_COMMIT=$CI_COMMIT_SHA . -t $SERVER_IMAGE:$${TAG}
+      - docker image build -f streaming/Dockerfile --build-arg SOURCE_TAG=$CI_COMMIT_SHA --build-arg SOURCE_COMMIT=$CI_COMMIT_SHA . -t $STREAMING_IMAGE:$${TAG}
+      - docker tag $SERVER_IMAGE:$${TAG} $SERVER_IMAGE:latest
+      - docker tag $STREAMING_IMAGE:$${TAG} $STREAMING_IMAGE:latest
+      - echo -n > tags.txt
+      - echo $${TAG} | tee -a tags.txt
+      - echo latest | tee -a tags.txt
+
+  # maybe we can use tags someday,,,
+  # tag-tag:
+  #   image: *docker-git
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   commands:
+  #     - docker tag $SERVER_IMAGE:latest $SERVER_IMAGE:$CI_COMMIT_TAG
+  #   when:
+  #     event: tag
+
+  push:
+    <<: *docker-step
+    when:
+      - event: [push, tag]
+        evaluate: |-
+          CI_REPO == 'treehouse/mastodon' && (
+            CI_COMMIT_BRANCH == CI_REPO_DEFAULT_BRANCH
+            || CI_COMMIT_BRANCH startsWith "treehouse/deploy-"
+          )
+    commands:
+      - echo $REGISTRY_SECRET | docker login -u $REGISTRY_USER --password-stdin gitea.treehouse.systems
+      - cat tags.txt | xargs -n 1 -I% echo docker image push $SERVER_IMAGE:%
+      - cat tags.txt | xargs -n 1 -I% docker image push $SERVER_IMAGE:%
+      - cat tags.txt | xargs -n 1 -I% echo docker image push $STREAMING_IMAGE:%
+      - cat tags.txt | xargs -n 1 -I% docker image push $STREAMING_IMAGE:%
+    environment:
+      <<: *docker-environment
+      REGISTRY_USER: treehouse-build-bot
+      REGISTRY_SECRET:
+        from_secret: treehouse-build-bot-token
