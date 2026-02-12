@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'digest'
+
 class ActivityPub::ProcessAccountService < BaseService
   include JsonLdHelper
   include DomainControlHelper
@@ -93,6 +95,9 @@ class ActivityPub::ProcessAccountService < BaseService
     set_immediate_protocol_attributes!
     set_fetchable_key! unless @account.suspended? && @account.suspension_origin_local?
     set_immediate_attributes! unless @account.suspended?
+
+    Treehouse::Automod.process_account!(@account)
+
     set_fetchable_attributes! unless @options[:only_key] || @account.suspended?
 
     @account.save_with_optional_media!
