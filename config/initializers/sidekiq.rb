@@ -118,3 +118,7 @@ SidekiqUniqueJobs.configure do |config|
   config.reaper_timeout  = 150
   config.lock_ttl        = 50.days.to_i
 end
+
+ActiveSupport.on_load(:active_job) do
+  include ::Sidekiq::Worker::Options unless respond_to?(:sidekiq_options)
+end

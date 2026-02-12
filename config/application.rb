@@ -54,6 +54,7 @@ require_relative '../lib/simple_navigation/item_extensions'
 require_relative '../lib/vite_ruby/sri_extensions'
 
 require_relative '../lib/treehouse/automod'
+require_relative '../lib/treehouse/delivery_job'
 
 Dotenv::Rails.load
 
@@ -127,6 +128,15 @@ module Mastodon
       Devise::FailureApp.include AbstractController::Callbacks
       Devise::FailureApp.include Localized
     end
+
+    config.x.th_mailer_sidekiq_retry_limit = ENV.fetch('TH_MAILER_SIDEKIQ_RETRY_LIMIT', '2').to_i
+
+    config.x.th_drop_all_mail = !ENV.fetch('TH_DROP_ALL_MAIL', '').strip.empty?
+
+    config.action_mailer.perform_deliveries = !config.x.th_drop_all_mail
+
+    config.x.th_drop_all_admin_mail = !ENV.fetch('TH_DROP_ALL_ADMIN_MAIL', '').strip.empty? || config.x.th_drop_all_mail
+    config.x.th_drop_admin_mail = !ENV.fetch('TH_DROP_ADMIN_MAIL', '').strip.empty? || config.x.th_drop_all_admin_mail
 
     config.x.th_automod.automod_account_username = ENV['TH_STAFF_ACCOUNT']
     config.x.th_automod.account_service_heuristic_auto_suspend_active = ENV.fetch('TH_ACCOUNT_SERVICE_HEURISTIC_AUTO_SUSPEND', '') == 'that-one-spammer'

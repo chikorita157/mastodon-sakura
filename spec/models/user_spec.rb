@@ -266,7 +266,7 @@ RSpec.describe User do
       user = Fabricate(:user)
       ActiveJob::Base.queue_adapter = :test
 
-      expect { user.send_confirmation_instructions }.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+      expect { user.send_confirmation_instructions }.to have_enqueued_job(Treehouse::DeliveryJob)
     end
   end
 
