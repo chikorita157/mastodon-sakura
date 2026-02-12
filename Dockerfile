@@ -33,6 +33,8 @@ ARG MASTODON_VERSION_METADATA=""
 # Will be available as Mastodon::Version.source_commit
 ARG SOURCE_COMMIT=""
 
+ARG SOURCE_TAG=""
+
 # Allow Ruby on Rails to serve static files
 # See: https://docs.joinmastodon.org/admin/config/#rails_serve_static_files
 ARG RAILS_SERVE_STATIC_FILES="true"
@@ -124,6 +126,13 @@ RUN \
 
 # Create temporary build layer from base image
 FROM ruby AS build
+
+COPY --from=node /usr/local/bin /usr/local/bin
+COPY --from=node /usr/local/lib /usr/local/lib
+
+# Copy Node package configuration files into working directory
+COPY package.json yarn.lock .yarnrc.yml /opt/mastodon/
+COPY .yarn /opt/mastodon/.yarn
 
 ARG TARGETPLATFORM
 
