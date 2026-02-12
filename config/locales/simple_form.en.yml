@@ -116,7 +116,7 @@ en:
       imports:
         data: CSV file exported from another Mastodon server
       invite_request:
-        text: This will help us review your application
+        text: "Be sure to provide at least one link to an established account on another social website: GitHub, Twitter, or a personal blog or website. This will help us review your request in a timely manner."
       ip_block:
         comment: Optional. Remember why you added this rule.
         expires_in: IP addresses are a finite resource, they are sometimes shared and often change hands. For this reason, indefinite IP blocks are not recommended.

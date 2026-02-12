@@ -12,6 +12,8 @@ class InvitesController < ApplicationController
 
     @invites = invites
     @invite  = Invite.new
+    @invite.max_uses ||= 1
+    @invite.expires_in ||= 1.day.in_seconds
   end
 
   def create
