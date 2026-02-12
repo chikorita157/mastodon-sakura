@@ -55,7 +55,7 @@ require_relative '../lib/vite_ruby/sri_extensions'
 
 require_relative '../lib/treehouse/automod'
 
-Dotenv::Railtie.load
+Dotenv::Rails.load
 
 Bundler.require(:pam_authentication) if ENV['PAM_ENABLED'] == 'true'
 
