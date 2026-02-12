@@ -80,6 +80,11 @@ class REST::InstanceSerializer < ActiveModel::Serializer
         supported_mime_types: HtmlAwareFormatter::STATUS_MIME_TYPES,
       },
 
+      quotes: {
+        allow_attachment: true,
+        allow_poll: false,
+      },
+
       media_attachments: {
         description_limit: MediaAttachment::MAX_DESCRIPTION_LENGTH,
         image_matrix_limit: Attachmentable::MAX_MATRIX_LIMIT,

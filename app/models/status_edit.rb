@@ -100,6 +100,10 @@ class StatusEdit < ApplicationRecord
     end.take(status.media_attachments_limit)
   end
 
+  # def quote?
+  #   status.quote?
+  # end
+
   def proper
     self
   end
