@@ -215,6 +215,9 @@ group :development, :test do
 
   # RSpec runner for rails
   gem 'rspec-rails', '~> 8.0'
+
+  # Use foreman to spin up processes in dev
+  gem 'foreman'
 end
 
 group :production do
