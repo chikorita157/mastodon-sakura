@@ -4,6 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Ignore local dotenv overrides
+.env.*.local
+
 # Ignore bundler config and downloaded libraries.
 /.bundle
 /vendor/bundle
@@ -11,6 +14,9 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+
+# Ignore local data directory
+/data
 
 # Ignore all logfiles and tempfiles.
 .eslintcache
@@ -70,6 +76,15 @@ yarn-debug.log
 
 # Ignore Docker option files
 docker-compose.override.yml
+
+# Yarn Berry
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # Ignore dotenv .local files
 .env*.local

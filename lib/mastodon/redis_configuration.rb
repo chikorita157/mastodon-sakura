@@ -44,7 +44,23 @@ class Mastodon::RedisConfiguration
     port     = ENV.fetch("#{prefix}PORT", defaults[:port])
     db       = Rails.env.test? ? ENV.fetch('TEST_ENV_NUMBER', defaults[:db]).to_i + 1 : ENV.fetch("#{prefix}DB", defaults[:db])
 
-    return { url:, driver: } if url
+    if url
+      conn = +url.sub(%r{redis://}i, '')
+
+      # Strip any prefixing `unix://`
+      unix = !conn.sub!(%r{^unix://}i, '').nil?
+      # Strip any prefixing `./`
+      unix |= conn.sub!(%r{^(\./)+}, '')
+      unix |= conn.start_with?('/')
+
+      if unix
+        pn = Pathname.new(conn)
+        pn = Pathname.getwd / pn if pn.relative?
+        url = "unix://#{pn}"
+      end
+
+      return { url:, driver: }
+    end
 
     sentinel_options = setup_sentinels(prefix, default_user: user, default_password: password)
 
