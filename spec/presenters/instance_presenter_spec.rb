@@ -65,29 +65,29 @@ RSpec.describe InstancePresenter do
   end
 
   describe '#source_url' do
-    context 'with the GITHUB_REPOSITORY env variable set' do
+    context 'with the FORGE_REPOSITORY env variable set' do
       around do |example|
-        ClimateControl.modify GITHUB_REPOSITORY: 'other/repo' do
+        ClimateControl.modify FORGE_REPOSITORY: 'other/repo' do
           reload_configuration
           example.run
         end
       end
 
       it 'uses the env variable to build a repo URL' do
-        expect(instance_presenter.source_url).to eq('https://github.com/other/repo')
+        expect(instance_presenter.source_url).to eq('https://gitea.treehouse.systems/other/repo')
       end
     end
 
-    context 'without the GITHUB_REPOSITORY env variable set' do
+    context 'without the FORGE_REPOSITORY env variable set' do
       around do |example|
-        ClimateControl.modify GITHUB_REPOSITORY: nil do
+        ClimateControl.modify FORGE_REPOSITORY: nil do
           reload_configuration
           example.run
         end
       end
 
-      it 'defaults to the core glitch-soc repo URL' do
-        expect(instance_presenter.source_url).to eq('https://github.com/glitch-soc/mastodon')
+      it 'defaults to the core treehouse repo URL' do
+        expect(instance_presenter.source_url).to eq('https://gitea.treehouse.systems/treehouse/mastodon')
       end
     end
 
