@@ -222,3 +222,14 @@ class REST::StatusSerializer < ActiveModel::Serializer
     end
   end
 end
+
+# MAINT: Retained for reference, drop after migration
+# class REST::QuoteStatusSerializer < REST::StatusSerializer
+#   attribute :quote do
+#     nil
+#   end
+# end
+
+# class REST::StatusSerializer < ActiveModel::Serializer
+#   belongs_to :quote, serializer: REST::QuoteStatusSerializer
+# end

@@ -215,6 +215,31 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
     end
   end
 
+  # MAINT: Retained for reference, drop after migration
+  # def guess_quote_url
+  #   if @object["quoteUri"] && !@object["quoteUri"].empty?
+  #     @object["quoteUri"]
+  #   elsif @object["quoteUrl"] && !@object["quoteUrl"].empty?
+  #     @object["quoteUrl"]
+  #   elsif @object["quoteURL"] && !@object["quoteURL"].empty?
+  #     @object["quoteURL"]
+  #   elsif @object["_misskey_quote"] && !@object["_misskey_quote"].empty?
+  #     @object["_misskey_quote"]
+  #   else
+  #     nil
+  #   end
+  # end
+
+  # def process_quote
+  #   url = guess_quote_url
+  #   return nil if url.nil?
+
+  #   quote = ResolveURLService.new.call(url)
+  #   status_from_uri(quote.uri) if quote
+  # rescue
+  #   nil
+  # end
+
   def process_quote
     @quote_uri = @status_parser.quote_uri
     return unless @status_parser.quote?

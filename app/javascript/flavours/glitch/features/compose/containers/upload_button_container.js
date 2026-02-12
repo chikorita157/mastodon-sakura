@@ -15,7 +15,7 @@ const mapStateToProps = state => {
   const hasQuote = !!state.compose.get('quoted_status_id');
 
   return {
-    disabled: isPoll || isUploading || isOverLimit || hasVideoOrAudio || hasQuote,
+    disabled: isPoll || isUploading || isOverLimit || hasVideoOrAudio,
     resetFileKey: state.getIn(['compose', 'resetFileKey']),
   };
 };
