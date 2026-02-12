@@ -54,6 +54,10 @@ require_relative '../lib/active_record/batches'
 require_relative '../lib/simple_navigation/item_extensions'
 require_relative '../lib/vite_ruby/sri_extensions'
 
+require_relative '../lib/treehouse/automod'
+
+Dotenv::Railtie.load
+
 Bundler.require(:pam_authentication) if ENV['PAM_ENABLED'] == 'true'
 
 module Mastodon
@@ -125,5 +129,15 @@ module Mastodon
       Devise::FailureApp.include AbstractController::Callbacks
       Devise::FailureApp.include Localized
     end
+
+    config.x.th_automod.automod_account_username = ENV['TH_STAFF_ACCOUNT']
+    config.x.th_automod.account_service_heuristic_auto_suspend_active = ENV.fetch('TH_ACCOUNT_SERVICE_HEURISTIC_AUTO_SUSPEND', '') == 'that-one-spammer'
+    config.x.th_automod.mention_spam_heuristic_auto_limit_active = ENV.fetch('TH_MENTION_SPAM_HEURISTIC_AUTO_LIMIT_ACTIVE', '') == 'can-spam'
+    config.x.th_automod.mention_spam_threshold =
+      begin
+        value = ENV.fetch('TH_MENTION_SPAM_THRESHOLD', '0').to_i
+        value == 0 ? Float::INFINITY : value
+      end
+    config.x.th_automod.min_account_age_threshold = ENV.fetch('TH_MIN_ACCOUNT_AGE_THRESHOLD', '2').to_i.days
   end
 end

@@ -96,6 +96,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
       attach_mentions(@status)
       attach_counts(@status)
     end
+    return if Treehouse::Automod.process_status!(@status)
 
     resolve_thread(@status)
     resolve_unresolved_mentions(@status)
