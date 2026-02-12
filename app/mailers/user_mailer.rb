@@ -18,6 +18,8 @@ class UserMailer < Devise::Mailer
 
   default to: -> { @resource.email }
 
+  self.delivery_job = Treehouse::DeliveryJob
+
   def confirmation_instructions(user, token, *, **)
     @resource = user
     @token    = token
