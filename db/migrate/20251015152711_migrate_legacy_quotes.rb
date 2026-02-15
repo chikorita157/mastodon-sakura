@@ -14,7 +14,7 @@ class MigrateLegacyQuotes < ActiveRecord::Migration[8.0]
               NOT (SELECT local FROM statuses s2 WHERE statuses.quote_id = s2.id),
               false)
         FROM statuses WHERE quote_id IS NOT NULL);
-        UPDATE statuses SET quote_approval_policy = 131702 WHERE "local" = TRUE
+        UPDATE statuses SET quote_approval_policy = 131072 WHERE "local" = TRUE
       SQL
     end
   end
