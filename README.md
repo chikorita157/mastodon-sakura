@@ -1,13 +1,32 @@
-# Mastodon Glitch Edition
+# Mastodon Glitch+Urusai+Treehouse Edition
 
-[![Ruby Testing](https://github.com/glitch-soc/mastodon/actions/workflows/test-ruby.yml/badge.svg)](https://github.com/glitch-soc/mastodon/actions/workflows/test-ruby.yml)
-[![Crowdin](https://badges.crowdin.net/glitch-soc/localized.svg)][glitch-crowdin]
+This is the repo for the fork of Mastodon used by Sakurajima. This is based off the stable branch, 4.5.x
 
-[glitch-crowdin]: https://crowdin.com/project/glitch-soc
+Added features:
+
+- Flavours/styles from @chikorita157@sakurajima.moe
+- Emoji enhancements
+  - Enlarge emoji in post content on mouse-over/tap
+- Collapsed post improvements
+  - show > 1 line for better visual parsing
+  - ~~customize height of posts to trigger lengthy toot collapse, etc)~~ (Implemented upstream!)
+- ~~Option to merge boosts and favorites into a single notification for the same status~~ (Implemented upstream!)
+- Emoji reactions!
+- Quote posts
+- Gif picker
+- Experimental Quotes (Upstream Style) enabled
+- Treehouse::Automod (experimental feature flagged)
+- TH_MAILER_SIDEKIQ_RETRY_LIMIT=2
+- various build system changes
+  - a better dockerfile
+  - yarn v2 (a mistake, tbh)
+  - various dev env changes
+- various css/style changes
+- Other minor fixes/improvements
 
 So here's the deal: we all work on this code, and anyone who uses that does so absolutely at their own risk. can you dig it?
 
-- You can view documentation for this project at [glitch-soc.github.io/docs/](https://glitch-soc.github.io/docs/).
+- You can view documentation for the original glitch-soc project at [glitch-soc.github.io/docs/](https://glitch-soc.github.io/docs/).
 - And contributing guidelines are available [here](CONTRIBUTING.md) and [here](https://glitch-soc.github.io/docs/contributing/).
 
 Mastodon Glitch Edition is a fork of [Mastodon](https://github.com/mastodon/mastodon). Upstream's README file is reproduced below.
