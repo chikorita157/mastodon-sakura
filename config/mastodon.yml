@@ -9,7 +9,7 @@ shared:
     repository: <%= ENV.fetch('FORGE_REPOSITORY', 'Sakurajima/mastodon-sakura') %>
     tag: <%= ENV.fetch('SOURCE_TAG', nil) %>
   version:
-    metadata: <%= ['glitch-th', ENV.fetch('MASTODON_VERSION_METADATA', nil)].compact_blank.join('.').to_json %>
+    metadata: <%= ['glitch-urusai-th-sakura', ENV.fetch('MASTODON_VERSION_METADATA', nil)].compact_blank.join('.').to_json %>
     prerelease: <%= ENV.fetch('MASTODON_VERSION_PRERELEASE', nil)&.to_json %>
 test:
   experimental_features: <%= [ENV.fetch('EXPERIMENTAL_FEATURES', nil), 'testing_only'].compact.join(',') %>

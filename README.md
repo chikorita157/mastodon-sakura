@@ -1,6 +1,6 @@
-# Mastodon Glitch+Urusai Edition
+# Mastodon Glitch+Urusai+Treehouse Edition
 
-This is the repo for the fork of Mastodon used by [Urusai! Social](https://urusai.social/).
+This is the repo for the fork of Mastodon used by Sakurajima. This is based off the stable branch, 4.5.x
 
 Added features:
 
@@ -14,6 +14,14 @@ Added features:
 - Emoji reactions!
 - Quote posts
 - Gif picker
+- Experimental Quotes (Upstream Style) enabled
+- Treehouse::Automod (experimental feature flagged)
+- TH_MAILER_SIDEKIQ_RETRY_LIMIT=2
+- various build system changes
+  - a better dockerfile
+  - yarn v2 (a mistake, tbh)
+  - various dev env changes
+- various css/style changes
 - Other minor fixes/improvements
 
 So here's the deal: we all work on this code, and anyone who uses that does so absolutely at their own risk. can you dig it?
