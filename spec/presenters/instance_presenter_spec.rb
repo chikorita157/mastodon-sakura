@@ -74,7 +74,7 @@ RSpec.describe InstancePresenter do
       end
 
       it 'uses the env variable to build a repo URL' do
-        expect(instance_presenter.source_url).to eq('https://gitea.treehouse.systems/other/repo')
+        expect(instance_presenter.source_url).to eq('https://ruri.tamaki-shimai.moe/other/repo')
       end
     end
 
@@ -87,7 +87,7 @@ RSpec.describe InstancePresenter do
       end
 
       it 'defaults to the core treehouse repo URL' do
-        expect(instance_presenter.source_url).to eq('https://gitea.treehouse.systems/treehouse/mastodon')
+        expect(instance_presenter.source_url).to eq('https://ruri.tamaki-shimai.moe/treehouse/mastodon')
       end
     end
 
